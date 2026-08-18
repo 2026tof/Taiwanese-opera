@@ -62,6 +62,39 @@
             border-color: rgba(217, 119, 6, 0.45);
             box-shadow: 0 10px 25px -3px rgba(153, 27, 27, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.03);
         }
+        /* Custom scrollbar styling for natural horizontal scrolling */
+        .custom-horizontal-scrollbar::-webkit-scrollbar {
+            height: 6px;
+        }
+        .custom-horizontal-scrollbar::-webkit-scrollbar-track {
+            background: #FEF3C7;
+            border-radius: 9999px;
+        }
+        .custom-horizontal-scrollbar::-webkit-scrollbar-thumb {
+            background: #D97706;
+            border-radius: 9999px;
+        }
+        .timeline-mask {
+            max-height: 480px;
+            overflow: hidden;
+            position: relative;
+            transition: max-height 0.4s ease-in-out;
+        }
+        .timeline-mask.expanded {
+            max-height: 2500px;
+        }
+        .fade-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to bottom, rgba(250, 247, 242, 0), rgba(250, 247, 242, 1));
+            pointer-events: none;
+        }
+        .timeline-mask.expanded .fade-overlay {
+            display: none;
+        }
     </style>
 </head>
 <body class="min-h-full flex flex-col font-sans bg-[#FAF7F2] text-slate-800 antialiased selection:bg-amber-200 selection:text-amber-950">
@@ -69,7 +102,6 @@
     <!-- Opera Stage Header -->
     <header class="border-b border-amber-200/80 bg-white/90 backdrop-blur sticky top-0 z-30 shadow-sm">
         <div class="h-1 bg-gradient-to-r from-red-700 via-amber-500 to-red-700"></div>
-        
         <div class="max-w-4xl mx-auto px-4 py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div class="flex items-center space-x-3.5">
                 <div>
@@ -86,11 +118,11 @@
 
             <!-- Author Links -->
             <div class="flex items-center space-x-2 text-xs flex-wrap gap-1.5">
-                <a href="https://www.threads.com/@huei.kai.tech" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300/60 flex items-center space-x-1.5 transition font-medium">
+                <a href="https://www.threads.net/@huei.kai.tech" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300/60 flex items-center space-x-1.5 transition font-medium">
                     <i class="fa-brands fa-threads text-amber-700"></i>
                     <span>@huei.kai.tech</span>
                 </a>
-                <a href="https://www.threads.com/@yisatsai" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-lg bg-red-50 hover:bg-red-100 text-red-900 border border-red-300/60 flex items-center space-x-1.5 transition font-medium">
+                <a href="https://www.threads.net/@yisatsai" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-lg bg-red-50 hover:bg-red-100 text-red-900 border border-red-300/60 flex items-center space-x-1.5 transition font-medium">
                     <i class="fa-brands fa-threads text-red-700"></i>
                     <span>@yisatsai</span>
                 </a>
@@ -112,7 +144,7 @@
             <div class="max-w-2xl mx-auto space-y-3 pt-2 relative z-10">
                 <span class="inline-flex items-center space-x-2 text-xs font-bold text-amber-900 bg-amber-100/80 border border-amber-300 px-3.5 py-1 rounded-full shadow-sm">
                     <i class="fa-solid fa-scroll text-amber-700"></i>
-                    <span>預計辦理：2026/09/18 - 2026/09/21</span>
+                    <span>辦理時間：2026/09/18 - 2026/09/21</span>
                 </span>
                 <h2 class="text-2xl sm:text-3xl font-black font-serif opera-red-text tracking-wide">
                     開鑼起鼓・鍘美大戲登台
@@ -128,11 +160,161 @@
                     <div class="inline-flex items-center space-x-2 text-red-800 text-xs font-bold">
                         <i class="fa-solid fa-bullhorn text-red-600 animate-pulse"></i>
                         <span class="font-serif">最新異動公告</span>
-                        <span class="text-[10px] bg-red-100 text-red-800 px-2 py-0.5 rounded border border-red-300 font-mono">2026/08/18 18:00 發布</span>
+                        <span class="text-[10px] bg-red-100 text-red-800 px-2 py-0.5 rounded border border-red-300 font-mono">2026/08/19</span>
                     </div>
                     <p class="text-xs text-slate-600 leading-relaxed">
-                        所有最新消息由節目總籌 <span class="text-amber-800 font-semibold">@huei.kai.tech</span> 與辦桌負責人 <span class="text-red-700 font-semibold">@yisatsai</span> 於 Threads 即時發布。
+                        9/19 繡花園戲劇團行程異動取消演出，最新替補檔期正積極接洽中；9/21 壓軸當天戲曲與辦桌活動如期舉辦！
                     </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: PROGRAM TIMELINE -->
+        <section class="space-y-4">
+            <div class="border-b border-amber-200 pb-3 flex items-center justify-between">
+                <div>
+                    <h2 class="text-base sm:text-lg font-bold font-serif text-slate-900 flex items-center space-x-2">
+                        <i class="fa-solid fa-calendar-days text-amber-600"></i>
+                        <span>戲曲演出規劃（2026/09/18 - 2026/09/21）</span>
+                    </h2>
+                    <p class="text-xs text-slate-500 mt-0.5">連續 4 天野台傳統戲曲演出規劃與即時資料庫狀態</p>
+                </div>
+                <span class="text-xs px-2.5 py-1 rounded bg-red-100 text-red-800 border border-red-200 font-serif font-bold">
+                    連演 4 日
+                </span>
+            </div>
+
+            <div id="programContainer" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <!-- Day 1 -->
+                <div class="opera-card rounded-2xl p-4 flex flex-col justify-between space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300">2026/09/18</span>
+                        <span class="text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded font-medium">已定案</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-sm font-serif">古都木偶劇團</h3>
+                        <p class="text-xs text-slate-600 mt-1 flex items-center space-x-1">
+                            <i class="fa-solid fa-scroll text-[10px] text-amber-600"></i>
+                            <span>戲目：《包公斬駙馬》</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Day 2 (Database Verified: 9/19 Cancelled & Pending Announcement) -->
+                <div class="opera-card border-amber-300 bg-amber-50/30 rounded-2xl p-4 flex flex-col justify-between space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300">2026/09/19</span>
+                        <span class="text-[10px] bg-amber-200 text-amber-900 border border-amber-300 px-2 py-0.5 rounded font-medium">待主辦公布</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-sm font-serif">繡花園戲劇團 (取消演出)</h3>
+                        <p class="text-xs text-amber-900 mt-1 leading-relaxed">
+                            取消演出，待主辦公布後續替補與節目規劃
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="opera-card rounded-2xl p-4 flex flex-col justify-between space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300">2026/09/20</span>
+                        <span class="text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded font-medium">已定案</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-sm font-serif">春美歌劇團</h3>
+                        <p class="text-xs text-slate-600 mt-1 flex items-center space-x-1">
+                            <i class="fa-solid fa-scroll text-[10px] text-amber-600"></i>
+                            <span>戲目：《陳世美反奸》</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Day 4 (Database Verified: 9/21 Final Show & Banquet, Troupe Negotiating) -->
+                <div class="opera-card border-amber-400 bg-amber-50/40 rounded-2xl p-4 flex flex-col justify-between space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-mono font-bold text-red-900 bg-red-100 px-2 py-0.5 rounded border border-red-300">2026/09/21</span>
+                        <span class="text-[10px] bg-amber-200 text-amber-900 border border-amber-300 px-2 py-0.5 rounded font-medium">劇目洽談中</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-sm font-serif">壓軸大戲 & 辦桌日</h3>
+                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                            節目總籌說明壓軸演出與辦桌活動將如期舉行，替補劇團協調中。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: SPONSORSHIP BOARD -->
+        <section class="opera-card rounded-2xl p-5 space-y-4">
+            <div class="flex items-center justify-between flex-wrap gap-2 border-b border-amber-200 pb-3">
+                <div>
+                    <h2 class="text-base sm:text-lg font-bold font-serif text-slate-900 flex items-center space-x-2">
+                        <i class="fa-solid fa-hand-holding-dollar text-amber-600"></i>
+                        <span>贊助進度與公開應援榜</span>
+                    </h2>
+                    <p class="text-xs text-slate-500 mt-0.5">經專人確認後的贊助合作將公開顯示於此榜單</p>
+                </div>
+                <button onclick="openSponsorshipModal()" class="text-xs px-4 py-2 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white font-bold rounded-xl transition shadow flex items-center space-x-1.5 cursor-pointer">
+                    <i class="fa-solid fa-gift"></i>
+                    <span>我想贊助</span>
+                </button>
+            </div>
+
+            <div id="sponsorshipListContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <!-- Initial Confirmed Real Item -->
+                <div class="p-3.5 bg-amber-50/60 border border-amber-200/80 rounded-xl flex items-start justify-between gap-2">
+                    <div class="space-y-1">
+                        <div class="flex items-center space-x-2">
+                            <span class="font-bold text-slate-900 text-xs font-serif">烤雞特攻隊 (@hsien9969)</span>
+                            <span class="text-[9px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-1.5 py-0.2 rounded font-medium">已確認</span>
+                        </div>
+                        <p class="text-xs text-amber-900 font-medium">現烤烤雞 100 隻</p>
+                        <p class="text-[11px] text-slate-500">熱情應援贊助 100 隻現烤烤雞，供 9/21 辦桌與市集活動</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: VOLUNTEER RECRUITMENT -->
+        <section class="space-y-4">
+            <div class="border-b border-amber-200 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                    <h2 class="text-base sm:text-lg font-bold font-serif text-slate-900 flex items-center space-x-2">
+                        <i class="fa-solid fa-users text-emerald-600"></i>
+                        <span>志工招募任務分組</span>
+                    </h2>
+                    <p class="text-xs text-slate-500 mt-0.5">「辦桌與餐飲組」、「現場服務組」與「機動與影像紀錄組」</p>
+                </div>
+                <button onclick="openVolunteerModal()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs shadow-md flex items-center justify-center space-x-2 transition transform active:scale-95 cursor-pointer">
+                    <i class="fa-solid fa-hand-holding-heart text-sm"></i>
+                    <span>志工報名申請</span>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="opera-card border-emerald-300 bg-emerald-50/50 rounded-xl p-4 space-y-1.5">
+                    <div class="text-xs font-bold text-red-800 flex items-center space-x-1.5 font-serif">
+                        <i class="fa-solid fa-utensils"></i>
+                        <span>1. 辦桌與餐飲組</span>
+                    </div>
+                    <p class="text-xs text-slate-600">9/21 辦桌報到、帶位引導與總鋪師出餐協助。</p>
+                </div>
+
+                <div class="opera-card border-emerald-300 bg-emerald-50/50 rounded-xl p-4 space-y-1.5">
+                    <div class="text-xs font-bold text-emerald-800 flex items-center space-x-1.5 font-serif">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        <span>2. 現場服務組</span>
+                    </div>
+                    <p class="text-xs text-slate-600">民眾諮詢、觀眾席與優先席引導。</p>
+                </div>
+
+                <div class="opera-card rounded-xl p-4 space-y-1.5">
+                    <div class="text-xs font-bold text-blue-700 flex items-center space-x-1.5 font-serif">
+                        <i class="fa-solid fa-camera"></i>
+                        <span>3. 機動與影像紀錄組</span>
+                    </div>
+                    <p class="text-xs text-slate-600">活動全程側拍紀錄、Threads 花絮剪輯與支援。</p>
                 </div>
             </div>
         </section>
@@ -145,14 +327,26 @@
                         <i class="fa-solid fa-clock-rotate-left text-amber-600"></i>
                         <span>籌備進度與民間公告時間軸</span>
                     </h2>
-                    <p class="text-xs text-slate-500 mt-0.5">即時同步最新動態（由近至遠排序）</p>
+                    <p class="text-xs text-slate-500 mt-0.5">即時同步最新動態（預設前 5 則，日期精確度至日）</p>
                 </div>
             </div>
 
-            <!-- Timeline Outer Container -->
-            <div class="relative">
+            <!-- Timeline Mask Container -->
+            <div id="timelineMask" class="timeline-mask">
                 <div id="timelineContainer" class="relative border-l-2 border-amber-300 ml-3 pl-5 space-y-6 text-xs">
-                    <!-- Initial Entries -->
+                    <!-- Entry 1 -->
+                    <div class="relative">
+                        <div class="absolute -left-[27px] top-0 w-3.5 h-3.5 rounded-full bg-rose-500 border-2 border-white shadow-sm"></div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="font-mono font-bold text-rose-900 bg-rose-100 px-2 py-0.5 rounded border border-rose-300">2026/08/19</span>
+                            <span class="font-bold text-slate-900 font-serif">[節目異動] 9/19 繡花園戲劇團取消演出</span>
+                        </div>
+                        <p class="text-slate-600 mt-1.5 leading-relaxed">
+                            因劇團檔期異動，9/19 繡花園戲劇團取消演出，主辦團隊正積極協調接洽替補劇團中，最新異動將第一時間公布。
+                        </p>
+                    </div>
+
+                    <!-- Entry 2 -->
                     <div class="relative">
                         <div class="absolute -left-[27px] top-0 w-3.5 h-3.5 rounded-full bg-amber-500 border-2 border-white shadow-sm"></div>
                         <div class="flex flex-wrap items-center gap-2">
@@ -160,9 +354,11 @@
                             <span class="font-bold text-slate-900 font-serif">[總籌回應] 9/21 壓軸演出與辦桌如期舉辦</span>
                         </div>
                         <p class="text-slate-600 mt-1.5 leading-relaxed">
-                            節目總籌 <span class="text-amber-800 font-medium">@huei.kai.tech</span> 於 Threads 發文說明，針對劇團名單調整，9/21 壓軸當天的野台戲曲演出與辦桌饗宴將「按原定計畫如期舉行」，目前已積極與幾家優質戲曲劇團接洽替補檔期。
+                            節目總籌 <span class="text-amber-800 font-medium">@huei.kai.tech</span> 於 Threads 發文說明，針對劇團名單調整，9/21 壓軸當天的野台戲曲演出與辦桌饗宴將「按原定計畫如期舉行」。
                         </p>
                     </div>
+
+                    <!-- Entry 3 -->
                     <div class="relative">
                         <div class="absolute -left-[27px] top-0 w-3.5 h-3.5 rounded-full bg-red-500 border-2 border-white shadow-sm"></div>
                         <div class="flex flex-wrap items-center gap-2">
@@ -173,278 +369,135 @@
                             明華園戲劇總團於臉書專頁發布聲明澄清，表示「未獲邀參與鍘美藝術節演出活動」，釐清網路傳聞。
                         </p>
                     </div>
+
+                    <!-- Entry 4 -->
+                    <div class="relative">
+                        <div class="absolute -left-[27px] top-0 w-3.5 h-3.5 rounded-full bg-amber-500 border-2 border-white shadow-sm"></div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300">2026/08/18</span>
+                            <span class="font-bold text-slate-900 font-serif">[辦桌進度] 9/21 辦桌方案與菜單籌備中</span>
+                        </div>
+                        <p class="text-slate-600 mt-1.5 leading-relaxed">
+                            辦桌負責人 <span class="text-red-700 font-medium">@yisatsai</span> 表示正在與總鋪師協調菜單細節，預計提供整桌預訂與個人散客湊桌模式。
+                        </p>
+                    </div>
+
+                    <!-- Entry 5 -->
+                    <div class="relative">
+                        <div class="absolute -left-[27px] top-0 w-3.5 h-3.5 rounded-full bg-amber-500 border-2 border-white shadow-sm"></div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300">2026/08/18</span>
+                            <span class="font-bold text-slate-900 font-serif">[贊助宣布] 烤雞特攻隊贊助 100 隻烤雞</span>
+                        </div>
+                        <p class="text-slate-600 mt-1.5 leading-relaxed">
+                            贊助夥伴 <span class="text-amber-800 font-medium">@hsien9969</span>（烤雞特攻隊）公開應援，承諾贊助 100 隻現烤烤雞支援辦桌與市集。
+                        </p>
+                    </div>
+
+                    <!-- Entry 6 (Hidden when collapsed) -->
+                    <div class="relative timeline-extra-item hidden">
+                        <div class="absolute -left-[27px] top-0 w-3.5 h-3.5 rounded-full bg-sky-500 border-2 border-white shadow-sm"></div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="font-mono font-bold text-sky-900 bg-sky-100 px-2 py-0.5 rounded border border-sky-300">2026/08/17</span>
+                            <span class="font-bold text-slate-900 font-serif">[行政進度] 場地評估與路權申請送件</span>
+                        </div>
+                        <p class="text-slate-600 mt-1.5 leading-relaxed">
+                            籌備小組進行台南市區野台演出場地會勘，並向相關單位提報路權使用申請。
+                        </p>
+                    </div>
                 </div>
 
-                <!-- Gradient Fade Overlay -->
-                <div id="timelineFadeOverlay" class="hidden absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-10"></div>
+                <div id="fadeOverlay" class="fade-overlay"></div>
             </div>
 
             <!-- Timeline Toggle Button -->
-            <div id="timelineToggleContainer" class="hidden pt-1 text-center relative z-20">
+            <div id="timelineToggleContainer" class="pt-1 text-center relative z-20">
                 <button id="timelineToggleBtn" onclick="toggleTimelineExpand()" class="px-4 py-2 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300/80 rounded-xl font-bold text-xs transition shadow-sm inline-flex items-center space-x-2 cursor-pointer">
-                    <span id="timelineToggleText">查看更多歷程動態</span>
+                    <span id="timelineToggleText">展開更多動態</span>
                     <i id="timelineToggleIcon" class="fa-solid fa-chevron-down text-[10px]"></i>
                 </button>
             </div>
         </section>
 
-        <!-- SECTION 1: PROGRAM TIMELINE -->
-        <section class="space-y-4">
-            <div class="border-b border-amber-200 pb-3 flex items-center justify-between">
-                <div>
-                    <h2 class="text-base sm:text-lg font-bold font-serif text-slate-900 flex items-center space-x-2">
-                        <i class="fa-solid fa-calendar-days text-amber-600"></i>
-                        <span>戲曲演出規劃（2026/09/18 - 09/21）</span>
-                    </h2>
-                    <p class="text-xs text-slate-500 mt-0.5">連續 4 天野台傳統戲曲演出規劃</p>
-                </div>
-                <span class="text-xs px-2.5 py-1 rounded bg-red-100 text-red-800 border border-red-200 font-serif font-bold">
-                    連演 4 日
-                </span>
-            </div>
-
-            <div id="programContainer" class="grid grid-cols-1 gap-3">
-                <!-- Day 1 -->
-                <div class="opera-card rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div class="flex items-start space-x-3.5">
-                        <div class="px-3.5 py-2 bg-gradient-to-b from-amber-100 to-amber-50 border border-amber-300 text-amber-900 font-bold text-xs rounded-xl text-center min-w-[80px] shadow-sm">
-                            <span class="text-[10px] text-amber-700 block font-serif">第一折</span>
-                            Day 1<br><span class="text-slate-700 font-normal">09/18 (五)</span>
-                        </div>
-                        <div>
-                            <div class="flex items-center space-x-2 flex-wrap gap-1">
-                                <h3 class="font-bold text-slate-900 text-sm font-serif">古都木偶劇團</h3>
-                                <span class="text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded font-medium">已定案</span>
-                            </div>
-                            <p class="text-xs text-slate-600 mt-1 flex items-center space-x-1">
-                                <i class="fa-solid fa-scroll text-[10px] text-amber-600"></i>
-                                <span>戲目：《包公斬駙馬》</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="text-[10px] text-slate-400 font-mono sm:text-right">更新日期：2026/08/18</div>
-                </div>
-
-                <!-- Day 2 -->
-                <div class="opera-card rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div class="flex items-start space-x-3.5">
-                        <div class="px-3.5 py-2 bg-gradient-to-b from-amber-100 to-amber-50 border border-amber-300 text-amber-900 font-bold text-xs rounded-xl text-center min-w-[80px] shadow-sm">
-                            <span class="text-[10px] text-amber-700 block font-serif">第二折</span>
-                            Day 2<br><span class="text-slate-700 font-normal">09/19 (六)</span>
-                        </div>
-                        <div>
-                            <div class="flex items-center space-x-2 flex-wrap gap-1">
-                                <h3 class="font-bold text-slate-900 text-sm font-serif">繡花園戲劇團</h3>
-                                <span class="text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded font-medium">已定案</span>
-                            </div>
-                            <p class="text-xs text-slate-600 mt-1 flex items-center space-x-1">
-                                <i class="fa-solid fa-scroll text-[10px] text-amber-600"></i>
-                                <span>戲目：《負心漢》</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="text-[10px] text-slate-400 font-mono sm:text-right">更新日期：2026/08/18</div>
-                </div>
-
-                <!-- Day 3 -->
-                <div class="opera-card rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div class="flex items-start space-x-3.5">
-                        <div class="px-3.5 py-2 bg-gradient-to-b from-amber-100 to-amber-50 border border-amber-300 text-amber-900 font-bold text-xs rounded-xl text-center min-w-[80px] shadow-sm">
-                            <span class="text-[10px] text-amber-700 block font-serif">第三折</span>
-                            Day 3<br><span class="text-slate-700 font-normal">09/20 (日)</span>
-                        </div>
-                        <div>
-                            <div class="flex items-center space-x-2 flex-wrap gap-1">
-                                <h3 class="font-bold text-slate-900 text-sm font-serif">春美歌劇團</h3>
-                                <span class="text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded font-medium">已定案</span>
-                            </div>
-                            <p class="text-xs text-slate-600 mt-1 flex items-center space-x-1">
-                                <i class="fa-solid fa-scroll text-[10px] text-amber-600"></i>
-                                <span>戲目：《陳世美反奸》</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="text-[10px] text-slate-400 font-mono sm:text-right">更新日期：2026/08/18</div>
-                </div>
-
-                <!-- Day 4 -->
-                <div class="opera-card border-amber-400 bg-amber-50/40 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 relative overflow-hidden">
-                    <div class="flex items-start space-x-3.5">
-                        <div class="px-3.5 py-2 bg-gradient-to-b from-red-100 to-red-50 border border-red-300 text-red-900 font-bold text-xs rounded-xl text-center min-w-[80px] shadow-sm">
-                            <span class="text-[10px] text-red-700 block font-serif">壓軸大戲</span>
-                            Day 4<br><span class="text-slate-700 font-normal">09/21 (一)</span>
-                        </div>
-                        <div>
-                            <div class="flex items-center space-x-2 flex-wrap gap-1">
-                                <h3 class="font-bold text-slate-900 text-sm font-serif">劇團異動接洽中（確定演出）</h3>
-                                <span class="text-[10px] bg-amber-200 text-amber-900 border border-amber-300 px-2 py-0.5 rounded font-medium">劇目洽談中</span>
-                            </div>
-                            <p class="text-xs text-slate-600 mt-1">
-                                明華園總團 2026/08/18 下午發表聲明未參演。節目總籌 18:00 發文說明壓軸演出與辦桌活動將如期舉行，替補劇團協調中。
-                            </p>
-                        </div>
-                    </div>
-                    <div class="text-[10px] text-amber-800 font-mono sm:text-right shrink-0">更新：2026/08/18 18:00</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 2: BANQUET, VENUE, SPONSORSHIP BOARD -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-            <!-- Banquet Info -->
-            <div class="opera-card rounded-2xl p-5 space-y-3 flex flex-col justify-between md:col-span-2">
-                <div class="space-y-2.5">
-                    <div class="flex items-center justify-between flex-wrap gap-1">
-                        <span class="text-xs font-bold text-red-800 flex items-center space-x-1.5 font-serif">
-                            <i class="fa-solid fa-utensils text-amber-600"></i>
-                            <span>辦桌與餐飲預約</span>
-                        </span>
-                        <span class="text-[10px] bg-red-100 text-red-800 border border-red-200 px-2 py-0.5 rounded font-mono">2026/08/18 14:00 更新</span>
-                    </div>
-                    <h3 class="text-base font-bold font-serif text-slate-900">9/21 辦桌饗宴（負責人：@yisatsai）</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        配合 9/21 壓軸演出辦理傳統野台辦桌。後續將開啟專屬線上預訂連結，提供「整桌認購」與「單人散客湊桌」兩種方案，菜單細節討論中。
-                    </p>
-                </div>
-            </div>
-
-            <!-- Venue & Permit Info -->
-            <div class="opera-card rounded-2xl p-5 space-y-3 flex flex-col justify-between md:col-span-2">
-                <div class="space-y-2.5">
-                    <div class="flex items-center justify-between flex-wrap gap-1">
-                        <span class="text-xs font-bold text-sky-800 flex items-center space-x-1.5 font-serif">
-                            <i class="fa-solid fa-map-location-dot text-sky-600"></i>
-                            <span>場地與行政進度</span>
-                        </span>
-                        <span class="text-[10px] bg-sky-100 text-sky-900 border border-sky-300 px-2 py-0.5 rounded font-mono">2026/08/17 更新</span>
-                    </div>
-                    <h3 class="text-base font-bold font-serif text-slate-900">演出地點評估中 ｜ 路權使用申請送件中</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        演出場地刻正評估台南市區合適野台空間（如五妃街及周邊區域），路權相關行政申請已送交相關單位審核中，確定核准地點後將第一時間公告。
-                    </p>
-                </div>
-            </div>
-
-            <!-- Dynamic Sponsorship Board (SOLE SPONSORSHIP BUTTON) -->
-            <div class="opera-card rounded-2xl p-5 space-y-3 flex flex-col justify-between md:col-span-2">
-                <div class="space-y-2.5">
-                    <div class="flex items-center justify-between flex-wrap gap-2">
-                        <div>
-                            <span class="text-xs font-bold text-amber-900 flex items-center space-x-1.5 font-serif">
-                                <i class="fa-solid fa-hand-holding-dollar text-amber-600"></i>
-                                <span>贊助進度與公開應援榜</span>
-                            </span>
-                            <p class="text-[11px] text-slate-500 mt-0.5">所有提案經專人於後台審核確認後公開顯示</p>
-                        </div>
-                        <!-- THE SOLE SPONSORSHIP BUTTON -->
-                        <button onclick="openSponsorshipModal()" class="text-xs px-3.5 py-2 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white font-bold rounded-xl transition shadow flex items-center space-x-1.5 cursor-pointer">
-                            <i class="fa-solid fa-pen-to-square text-[11px]"></i>
-                            <span>提交贊助申請</span>
-                        </button>
-                    </div>
-
-                    <div id="sponsorshipListContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-                        <!-- Initial Confirmed Real Item -->
-                        <div class="p-3 bg-amber-50/60 border border-amber-200/80 rounded-xl flex items-start justify-between gap-2">
-                            <div class="space-y-1">
-                                <div class="flex items-center space-x-2">
-                                    <span class="font-bold text-slate-900 text-xs font-serif">烤雞特攻隊 (@hsien9969)</span>
-                                    <span class="text-[9px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-1.5 py-0.2 rounded font-medium">已確認</span>
-                                </div>
-                                <p class="text-xs text-amber-900 font-medium">現烤烤雞 100 隻</p>
-                                <p class="text-[11px] text-slate-500">熱情應援贊助 100 隻現烤烤雞，供 9/21 辦桌與市集活動</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- SECTION 3: VOLUNTEER RECRUITMENT -->
-        <section class="space-y-4">
-            <div class="border-b border-amber-200 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div>
-                    <h2 class="text-base sm:text-lg font-bold font-serif text-slate-900 flex items-center space-x-2">
-                        <i class="fa-solid fa-users text-emerald-600"></i>
-                        <span>志工招募任務分組</span>
-                    </h2>
-                    <p class="text-xs text-slate-500 mt-0.5">「辦桌與餐飲組」、「現場服務組」與「機動與影像紀錄組」（提交後請等候專人聯絡）</p>
-                </div>
-                <button onclick="openVolunteerModal()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs shadow-md flex items-center justify-center space-x-2 transition transform active:scale-95 cursor-pointer">
-                    <i class="fa-solid fa-pen-to-square text-sm"></i>
-                    <span>商業與志工合作報名</span>
-                </button>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div class="opera-card border-emerald-300 bg-emerald-50/50 rounded-xl p-4 space-y-1.5 relative overflow-hidden">
-                    <div class="flex items-center justify-between">
-                        <div class="text-xs font-bold text-red-800 flex items-center space-x-1.5 font-serif">
-                            <i class="fa-solid fa-utensils"></i>
-                            <span>1. 辦桌與餐飲組</span>
-                        </div>
-                    </div>
-                    <p class="text-xs text-slate-600">9/21 辦桌報到、帶位引導與總鋪師出餐協助。</p>
-                </div>
-
-                <div class="opera-card border-emerald-300 bg-emerald-50/50 rounded-xl p-4 space-y-1.5 relative overflow-hidden">
-                    <div class="flex items-center justify-between">
-                        <div class="text-xs font-bold text-emerald-800 flex items-center space-x-1.5 font-serif">
-                            <i class="fa-solid fa-hand-holding-heart"></i>
-                            <span>2. 現場服務組</span>
-                        </div>
-                    </div>
-                    <p class="text-xs text-slate-600">民眾諮詢、觀眾席與優先席引導。</p>
-                </div>
-
-                <div class="opera-card rounded-xl p-4 space-y-1.5">
-                    <div class="text-xs font-bold text-blue-700 flex items-center space-x-1.5 font-serif">
-                        <i class="fa-solid fa-camera"></i>
-                        <span>3. 機動與影像紀錄組</span>
-                    </div>
-                    <p class="text-xs text-slate-600">活動全程側拍紀錄、Threads 花絮剪輯與緊急狀況支援。</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 4: OFFICIAL THREADS LINKS -->
-        <section class="opera-card rounded-2xl p-5 space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-amber-100 pb-3">
+        <!-- SECTION 4: OFFICIAL THREADS LINKS (Native Horizontal Scrolling Container) -->
+        <section class="opera-card rounded-2xl p-5 space-y-3">
+            <div class="flex items-center justify-between border-b border-amber-100 pb-3">
                 <div>
                     <h3 class="text-sm sm:text-base font-bold font-serif text-slate-900 flex items-center space-x-2">
                         <i class="fa-brands fa-threads text-amber-600"></i>
-                        <span>即時動態來源（Threads 民間團隊與合作帳號）</span>
+                        <span>即時動態來源（Threads 官方與民間合作頻道）</span>
                     </h3>
-                    <p class="text-xs text-slate-500 mt-0.5">點擊下方按鈕直接前往負責人與贊助夥伴主頁檢視最新發文</p>
+                    <p class="text-xs text-slate-500 mt-0.5">直接橫向滾動或滑動卡片切換瀏覽</p>
                 </div>
+                <span class="text-xs text-slate-400 flex items-center space-x-1">
+                    <i class="fa-solid fa-arrows-left-right"></i>
+                    <span>橫向滾動</span>
+                </span>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <a href="https://www.threads.com/@huei.kai.tech" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-xl bg-amber-50/50 hover:bg-amber-100/80 border border-amber-200 transition flex items-center justify-between">
+            <!-- Native Horizontal Scroll Container (No custom JS mouse drag hijacking) -->
+            <div id="sourceScrollContainer" class="flex gap-3 overflow-x-auto pb-3 pt-1 snap-x snap-mandatory custom-horizontal-scrollbar" style="-webkit-overflow-scrolling: touch;">
+                
+                <!-- Card 1: @huei.kai.tech -->
+                <a href="https://www.threads.net/@huei.kai.tech" target="_blank" rel="noopener noreferrer" class="snap-start shrink-0 w-64 p-3.5 rounded-xl bg-amber-50/60 hover:bg-amber-100/80 border border-amber-200 transition flex flex-col justify-between group">
                     <div>
-                        <div class="font-bold text-sm text-amber-900">@huei.kai.tech</div>
-                        <div class="text-xs text-slate-500 mt-0.5">節目與總籌發起人</div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="font-bold text-sm text-amber-900 group-hover:text-amber-700">@huei.kai.tech</span>
+                            <i class="fa-brands fa-threads text-amber-700"></i>
+                        </div>
+                        <p class="text-xs text-slate-600">節目與總籌發起人，即時發布節目調度與行政動態。</p>
                     </div>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400"></i>
+                    <div class="mt-3 pt-2 border-t border-amber-200/60 flex items-center justify-between text-[11px] text-amber-800 font-bold">
+                        <span>開啟 Threads 主頁</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </div>
                 </a>
 
-                <a href="https://www.threads.com/@yisatsai" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-xl bg-red-50/50 hover:bg-red-100/80 border border-red-200 transition flex items-center justify-between">
+                <!-- Card 2: @yisatsai -->
+                <a href="https://www.threads.net/@yisatsai" target="_blank" rel="noopener noreferrer" class="snap-start shrink-0 w-64 p-3.5 rounded-xl bg-red-50/60 hover:bg-red-100/80 border border-red-200 transition flex flex-col justify-between group">
                     <div>
-                        <div class="font-bold text-sm text-red-800">@yisatsai</div>
-                        <div class="text-xs text-slate-500 mt-0.5">辦桌與餐飲預約負責人</div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="font-bold text-sm text-red-900 group-hover:text-red-700">@yisatsai</span>
+                            <i class="fa-brands fa-threads text-red-700"></i>
+                        </div>
+                        <p class="text-xs text-slate-600">辦桌與餐飲負責人，統籌 9/21 辦桌菜單與桌次預約。</p>
                     </div>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400"></i>
+                    <div class="mt-3 pt-2 border-t border-red-200/60 flex items-center justify-between text-[11px] text-red-800 font-bold">
+                        <span>開啟 Threads 主頁</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </div>
                 </a>
 
-                <a href="https://www.threads.com/@h.akito_1996" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-xl bg-amber-50/50 hover:bg-amber-100/80 border border-amber-200 transition flex items-center justify-between">
+                <!-- Card 3: @h.akito_1996 -->
+                <a href="https://www.threads.net/@h.akito_1996" target="_blank" rel="noopener noreferrer" class="snap-start shrink-0 w-64 p-3.5 rounded-xl bg-amber-50/60 hover:bg-amber-100/80 border border-amber-200 transition flex flex-col justify-between group">
                     <div>
-                        <div class="font-bold text-sm text-amber-900">@h.akito_1996</div>
-                        <div class="text-xs text-slate-500 mt-0.5">民間合作帳號</div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="font-bold text-sm text-amber-900 group-hover:text-amber-700">@h.akito_1996</span>
+                            <i class="fa-brands fa-threads text-amber-700"></i>
+                        </div>
+                        <p class="text-xs text-slate-600">現場物資應援與民間即時熱情響應窗口。</p>
                     </div>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400"></i>
+                    <div class="mt-3 pt-2 border-t border-amber-200/60 flex items-center justify-between text-[11px] text-amber-800 font-bold">
+                        <span>開啟 Threads 主頁</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </div>
                 </a>
+
+                <!-- Card 4: @socialmedia.academia.taiwanica -->
+                <a href="https://www.threads.net/@socialmedia.academia.taiwanica" target="_blank" rel="noopener noreferrer" class="snap-start shrink-0 w-64 p-3.5 rounded-xl bg-sky-50/60 hover:bg-sky-100/80 border border-sky-200 transition flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="font-bold text-sm text-sky-900 group-hover:text-sky-700">@socialmedia...</span>
+                            <i class="fa-brands fa-threads text-sky-700"></i>
+                        </div>
+                        <p class="text-xs text-slate-600">社群文化觀察與民俗藝術活動側記整理。</p>
+                    </div>
+                    <div class="mt-3 pt-2 border-t border-sky-200/60 flex items-center justify-between text-[11px] text-sky-800 font-bold">
+                        <span>開啟 Threads 主頁</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </div>
+                </a>
+
             </div>
         </section>
 
@@ -466,9 +519,9 @@
             <div class="space-y-1 border-b border-amber-200 pb-3">
                 <h3 class="text-base font-bold font-serif text-slate-900 flex items-center space-x-2">
                     <i class="fa-solid fa-hand-holding-heart text-emerald-600"></i>
-                    <span>志工意願申請登記</span>
+                    <span>志工報名申請</span>
                 </h3>
-                <p class="text-xs text-slate-600">歡迎加入鍘美藝術節志工團隊，請填寫基本資料與欲申請組別。<span class="text-amber-800 font-medium">（提交後請等候專人聯絡）</span></p>
+                <p class="text-xs text-slate-600">歡迎加入鍘美藝術節志工團隊，請填寫聯絡資料與可參與日期。</p>
             </div>
 
             <form id="volunteerForm" onsubmit="handleVolunteerSubmit(event)" class="space-y-3 text-xs">
@@ -483,7 +536,7 @@
                 </div>
 
                 <div>
-                    <label class="block text-slate-700 font-medium mb-1">申請志願組別 *</label>
+                    <label class="block text-slate-700 font-medium mb-1">申請組別 *</label>
                     <select id="volGroup" required class="w-full bg-slate-50 border border-amber-200 rounded-lg px-3 py-2 text-slate-800 focus:outline-none focus:border-amber-500">
                         <option value="辦桌與餐飲組">辦桌與餐飲組 (9/21 重點項目)</option>
                         <option value="現場服務組">現場服務組 (觀眾引導與諮詢)</option>
@@ -492,34 +545,34 @@
                 </div>
 
                 <div>
-                    <label class="block text-slate-700 font-medium mb-1">可參與時段</label>
+                    <label class="block text-slate-700 font-medium mb-1">可參與日期（可複選） *</label>
                     <div id="volDatesContainer" class="space-y-1.5 pt-1 text-slate-600">
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" name="volDates" value="09/18 (五) 古都木偶劇團《包公斬駙馬》" class="rounded border-amber-300 text-emerald-600 focus:ring-0">
-                            <span>09/18 (五) 古都木偶劇團《包公斬駙馬》</span>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" name="volDates" value="2026/09/18" class="rounded border-amber-300 text-emerald-600 focus:ring-0">
+                            <span>2026/09/18</span>
                         </label>
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" name="volDates" value="09/19 (六) 繡花園戲劇團《負心漢》" class="rounded border-amber-300 text-emerald-600 focus:ring-0">
-                            <span>09/19 (六) 繡花園戲劇團《負心漢》</span>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" name="volDates" value="2026/09/19" class="rounded border-amber-300 text-emerald-600 focus:ring-0">
+                            <span>2026/09/19</span>
                         </label>
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" name="volDates" value="09/20 (日) 春美歌劇團《陳世美反奸》" class="rounded border-amber-300 text-emerald-600 focus:ring-0">
-                            <span>09/20 (日) 春美歌劇團《陳世美反奸》</span>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" name="volDates" value="2026/09/20" class="rounded border-amber-300 text-emerald-600 focus:ring-0">
+                            <span>2026/09/20</span>
                         </label>
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" name="volDates" value="09/21 (一) 壓軸大戲 & 辦桌日" checked class="rounded border-amber-300 text-emerald-600 focus:ring-0">
-                            <span>09/21 (一) 壓軸大戲 & 辦桌日</span>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" name="volDates" value="2026/09/21" checked class="rounded border-amber-300 text-emerald-600 focus:ring-0">
+                            <span>2026/09/21</span>
                         </label>
                     </div>
                 </div>
 
                 <div id="formFeedback" class="hidden p-2.5 rounded-lg bg-emerald-50 border border-emerald-300 text-emerald-800 text-center font-medium">
-                    <i class="fa-solid fa-circle-check mr-1"></i> 已收到您的志工申請！資料已寫入資料庫，請等候專人與您聯絡。
+                    <i class="fa-solid fa-circle-check mr-1"></i> 已收到您的志工申請！請等候團隊專人與您聯絡。
                 </div>
 
-                <button type="submit" id="submitBtn" class="w-full py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold rounded-lg transition mt-2 shadow flex items-center justify-center space-x-2">
+                <button type="submit" id="submitBtn" class="w-full py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold rounded-lg transition mt-2 shadow flex items-center justify-center space-x-2 cursor-pointer">
                     <i class="fa-solid fa-paper-plane"></i>
-                    <span>提交申請意願</span>
+                    <span>提交報名意願</span>
                 </button>
             </form>
         </div>
@@ -534,61 +587,59 @@
 
             <div class="space-y-1 border-b border-amber-200 pb-3">
                 <h3 class="text-base font-bold font-serif text-slate-900 flex items-center space-x-2">
-                    <i class="fa-solid fa-hand-holding-dollar text-amber-600"></i>
-                    <span>活動贊助提交申請</span>
+                    <i class="fa-solid fa-gift text-amber-600"></i>
+                    <span>我想贊助</span>
                 </h3>
-                <p class="text-xs text-slate-600">感謝您對鍘美藝術節的支持！請填寫您的贊助意願與聯絡資訊。<span class="text-amber-800 font-medium">（提交後請等候專人聯絡）</span></p>
+                <p class="text-xs text-slate-600">感謝支持！請填寫預計贊助之物資、品項或合作想法。</p>
             </div>
 
             <form id="sponsorshipForm" onsubmit="handleSponsorshipSubmit(event)" class="space-y-3 text-xs">
                 <div>
-                    <label class="block text-slate-700 font-medium mb-1">贊助單位名稱 / 個人姓名 *</label>
-                    <input type="text" id="spName" required placeholder="請輸入單位名稱或個人姓名" class="w-full bg-slate-50 border border-amber-200 rounded-lg px-3 py-2 text-slate-800 focus:outline-none focus:border-amber-500">
+                    <label class="block text-slate-700 font-medium mb-1">贊助單位 / 個人姓名 *</label>
+                    <input type="text" id="spName" required placeholder="請輸入單位或個人姓名" class="w-full bg-slate-50 border border-amber-200 rounded-lg px-3 py-2 text-slate-800 focus:outline-none focus:border-amber-500">
                 </div>
 
                 <div>
-                    <label class="block text-slate-700 font-medium mb-1">聯絡電話 / LINE ID / Threads *</label>
+                    <label class="block text-slate-700 font-medium mb-1">聯絡管道 / 電話 / Threads *</label>
                     <input type="text" id="spContact" required placeholder="0912-345-678 或 @your_account" class="w-full bg-slate-50 border border-amber-200 rounded-lg px-3 py-2 text-slate-800 focus:outline-none focus:border-amber-500">
                 </div>
 
                 <div>
                     <label class="block text-slate-700 font-medium mb-1">贊助內容 / 品項 *</label>
-                    <input type="text" id="spType" required placeholder="請直接輸入贊助內容（如：現烤烤雞 100 隻、礦泉水 20 箱）" class="w-full bg-slate-50 border border-amber-200 rounded-lg px-3 py-2 text-slate-800 focus:outline-none focus:border-amber-500">
+                    <input type="text" id="spType" required placeholder="如：現烤烤雞 100 隻、飲品 20 箱" class="w-full bg-slate-50 border border-amber-200 rounded-lg px-3 py-2 text-slate-800 focus:outline-none focus:border-amber-500">
                 </div>
 
                 <div>
-                    <label class="block text-slate-700 font-medium mb-1">贊助說明與備註 *</label>
-                    <textarea id="spNote" required rows="3" placeholder="請簡述預計提供之贊助品項細節、合作方式或配送安排..." class="w-full bg-slate-50 border border-amber-200 rounded-lg px-3 py-2 text-slate-800 focus:outline-none focus:border-amber-500"></textarea>
+                    <label class="block text-slate-700 font-medium mb-1">說明與備註 *</label>
+                    <textarea id="spNote" required rows="3" placeholder="請簡述預計提供之贊助品項細節、配送安排等..." class="w-full bg-slate-50 border border-amber-200 rounded-lg px-3 py-2 text-slate-800 focus:outline-none focus:border-amber-500"></textarea>
                 </div>
 
                 <div id="sponsorFormFeedback" class="hidden p-2.5 rounded-lg bg-amber-50 border border-amber-300 text-amber-900 text-center font-medium">
-                    <i class="fa-solid fa-circle-check mr-1"></i> 已收到您的贊助合作提案！資料已寫入資料庫，請等候專人與您聯絡。
+                    <i class="fa-solid fa-circle-check mr-1"></i> 已收到您的贊助提案！審核確認後將呈現於公開榜。
                 </div>
 
-                <button type="submit" id="sponsorSubmitBtn" class="w-full py-2.5 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white font-bold rounded-lg transition mt-2 shadow flex items-center justify-center space-x-2">
+                <button type="submit" id="sponsorSubmitBtn" class="w-full py-2.5 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white font-bold rounded-lg transition mt-2 shadow flex items-center justify-center space-x-2 cursor-pointer">
                     <i class="fa-solid fa-paper-plane"></i>
-                    <span>提交贊助意願</span>
+                    <span>送出贊助內容</span>
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- JavaScript Logic -->
     <script>
         // 後台 Google Apps Script 網頁應用程式 URL
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOOO-hXcd4WiC5SGVjLExlxCOVNbQldEe7W-klyXsyJJVk5MfZgbq3hJC7ARwy7rLsnQ/exec';
 
-        // 全域變數控制時間軸展開/收起狀態
         let isTimelineExpanded = false;
 
-        // 時間格式化輔助函式：僅顯示日期 (YYYY/MM/DD)
+        // 僅顯示日期 (YYYY/MM/DD)
         function formatTimeToDate(timeStr) {
             if (!timeStr) return '';
             const match = timeStr.match(/^(\d{4}[\/-]\d{1,2}[\/-]\d{1,2})/);
             return match ? match[1].replace(/-/g, '/') : timeStr;
         }
 
-        // 頁面載入時自動向 Google Sheet 讀取最新動態與節目資料
+        // 載入後動態同步 Google Sheet 最新消息與節目資料
         document.addEventListener('DOMContentLoaded', async () => {
             if (!GOOGLE_SCRIPT_URL) return;
             try {
@@ -606,20 +657,58 @@
                     }
                 }
             } catch (err) {
-                console.log('使用本地預設進度與行程資料');
+                console.log('現正顯示預設備份資料');
             }
         });
 
-        // 動態渲染來自 Google Sheet 的最新公告列表（自動依時間排序：最新時間在最上方）
-        function renderSheetAnnouncements(announcements) {
-            const container = document.getElementById('timelineContainer');
-            const fadeOverlay = document.getElementById('timelineFadeOverlay');
-            const toggleContainer = document.getElementById('timelineToggleContainer');
-            const toggleText = document.getElementById('timelineToggleText');
-            const toggleIcon = document.getElementById('timelineToggleIcon');
+        // 渲染節目時程，嚴格按照資料庫記載內容
+        function renderSheetPrograms(programs) {
+            const container = document.getElementById('programContainer');
             if (!container) return;
 
-            // 自動解析時間並降冪排序，確保最新動態始終置頂
+            let html = '';
+            programs.forEach((item) => {
+                const isCancelled = item.troupe && item.troupe.includes('取消');
+                const isNegotiating = item.status && item.status.includes('洽談');
+                
+                let cardClass = 'opera-card rounded-2xl p-4 flex flex-col justify-between space-y-2';
+                let dateBadgeClass = 'text-xs font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300';
+                let statusBadgeClass = 'text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded font-medium';
+
+                if (isCancelled) {
+                    cardClass = 'opera-card border-amber-300 bg-amber-50/30 rounded-2xl p-4 flex flex-col justify-between space-y-2';
+                    statusBadgeClass = 'text-[10px] bg-amber-200 text-amber-900 border border-amber-300 px-2 py-0.5 rounded font-medium';
+                } else if (isNegotiating) {
+                    cardClass = 'opera-card border-amber-400 bg-amber-50/40 rounded-2xl p-4 flex flex-col justify-between space-y-2';
+                    dateBadgeClass = 'text-xs font-mono font-bold text-red-900 bg-red-100 px-2 py-0.5 rounded border border-red-300';
+                    statusBadgeClass = 'text-[10px] bg-amber-200 text-amber-900 border border-amber-300 px-2 py-0.5 rounded font-medium';
+                }
+
+                const displayDate = formatTimeToDate(item.date || '');
+
+                html += `
+                <div class="${cardClass}">
+                    <div class="flex items-center justify-between">
+                        <span class="${dateBadgeClass}">${displayDate}</span>
+                        <span class="${statusBadgeClass}">${item.status || '洽談中'}</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-sm font-serif">${item.troupe || ''}</h3>
+                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                            ${item.play || ''}
+                        </p>
+                    </div>
+                </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // 渲染公告時間軸
+        function renderSheetAnnouncements(announcements) {
+            const container = document.getElementById('timelineContainer');
+            if (!container) return;
+
             announcements.sort((a, b) => {
                 const timeA = new Date((a.time || '').replace(/-/g, '/'));
                 const timeB = new Date((b.time || '').replace(/-/g, '/'));
@@ -643,30 +732,13 @@
                 `;
             });
             container.innerHTML = html;
-
-            // 超過 5 則動態時顯示淡出與展開按鈕
-            if (announcements.length > 5) {
-                if (toggleContainer) toggleContainer.classList.remove('hidden');
-                if (!isTimelineExpanded) {
-                    if (fadeOverlay) fadeOverlay.classList.remove('hidden');
-                    if (toggleText) toggleText.innerText = `展開更多動態 (共 ${announcements.length} 則)`;
-                    if (toggleIcon) toggleIcon.className = 'fa-solid fa-chevron-down text-[10px]';
-                } else {
-                    if (fadeOverlay) fadeOverlay.classList.add('hidden');
-                    if (toggleText) toggleText.innerText = '收起動態';
-                    if (toggleIcon) toggleIcon.className = 'fa-solid fa-chevron-up text-[10px]';
-                }
-            } else {
-                if (toggleContainer) toggleContainer.classList.add('hidden');
-                if (fadeOverlay) fadeOverlay.classList.add('hidden');
-            }
         }
 
-        // 切換時間軸展開 / 折疊
+        // 切換時間軸展開/折疊
         function toggleTimelineExpand() {
             isTimelineExpanded = !isTimelineExpanded;
+            const mask = document.getElementById('timelineMask');
             const extraItems = document.querySelectorAll('.is-extra-entry');
-            const fadeOverlay = document.getElementById('timelineFadeOverlay');
             const toggleText = document.getElementById('timelineToggleText');
             const toggleIcon = document.getElementById('timelineToggleIcon');
 
@@ -679,81 +751,16 @@
             });
 
             if (isTimelineExpanded) {
-                if (fadeOverlay) fadeOverlay.classList.add('hidden');
+                if (mask) mask.classList.add('expanded');
                 if (toggleText) toggleText.innerText = '收起動態';
                 if (toggleIcon) toggleIcon.className = 'fa-solid fa-chevron-up text-[10px]';
             } else {
-                if (fadeOverlay) fadeOverlay.classList.remove('hidden');
-                if (toggleText) toggleText.innerText = `展開更多動態 (共 ${document.querySelectorAll('.timeline-extra-item').length} 則)`;
+                if (mask) mask.classList.remove('expanded');
+                if (toggleText) toggleText.innerText = '展開更多動態';
                 if (toggleIcon) toggleIcon.className = 'fa-solid fa-chevron-down text-[10px]';
             }
         }
 
-        // 動態渲染來自 Google Sheet 的 4 天戲曲行程卡片與同步志工選單
-        function renderSheetPrograms(programs) {
-            const container = document.getElementById('programContainer');
-            const volDatesContainer = document.getElementById('volDatesContainer');
-
-            if (container) {
-                let html = '';
-                programs.forEach((item, index) => {
-                    const isDay4 = index === 3;
-                    const cardStyle = isDay4 
-                        ? 'opera-card border-amber-400 bg-amber-50/40 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 relative overflow-hidden'
-                        : 'opera-card rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3';
-                    
-                    const badgeStyle = isDay4
-                        ? 'px-3.5 py-2 bg-gradient-to-b from-red-100 to-red-50 border border-red-300 text-red-900 font-bold text-xs rounded-xl text-center min-w-[80px] shadow-sm'
-                        : 'px-3.5 py-2 bg-gradient-to-b from-amber-100 to-amber-50 border border-amber-300 text-amber-900 font-bold text-xs rounded-xl text-center min-w-[80px] shadow-sm';
-
-                    const statusTag = item.status === '已定案'
-                        ? '<span class="text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded font-medium">已定案</span>'
-                        : `<span class="text-[10px] bg-amber-200 text-amber-900 border border-amber-300 px-2 py-0.5 rounded font-medium">${item.status || '洽談中'}</span>`;
-
-                    html += `
-                    <div class="${cardStyle}">
-                        <div class="flex items-start space-x-3.5">
-                            <div class="${badgeStyle}">
-                                <span class="text-[10px] ${isDay4 ? 'text-red-700' : 'text-amber-700'} block font-serif">${item.dayTag || ''}</span>
-                                ${item.date || ''}
-                            </div>
-                            <div>
-                                <div class="flex items-center space-x-2 flex-wrap gap-1">
-                                    <h3 class="font-bold text-slate-900 text-sm font-serif">${item.troupe || ''}</h3>
-                                    ${statusTag}
-                                </div>
-                                <p class="text-xs text-slate-600 mt-1 flex items-center space-x-1">
-                                    <i class="fa-solid fa-scroll text-[10px] text-amber-600"></i>
-                                    <span>${item.play || ''}</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="text-[10px] text-slate-400 font-mono sm:text-right shrink-0">更新：${item.updateTime || ''}</div>
-                    </div>
-                    `;
-                });
-                container.innerHTML = html;
-            }
-
-            // 同步更新志工可參與時段選單
-            if (volDatesContainer && programs && programs.length > 0) {
-                let datesHtml = '';
-                programs.forEach((item, index) => {
-                    const isChecked = index === 3 ? 'checked' : '';
-                    const playText = item.play ? ` ${item.play}` : '';
-                    const fullLabel = `${item.date || ''} ${item.troupe || ''}${playText}`;
-                    datesHtml += `
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" name="volDates" value="${fullLabel}" ${isChecked} class="rounded border-amber-300 text-emerald-600 focus:ring-0">
-                            <span>${fullLabel}</span>
-                        </label>
-                    `;
-                });
-                volDatesContainer.innerHTML = datesHtml;
-            }
-        }
-
-        // 動態渲染來自 Google Sheet 的已確認贊助名單
         function renderSheetSponsorships(sponsorships) {
             const container = document.getElementById('sponsorshipListContainer');
             if (!container) return;
@@ -761,7 +768,7 @@
             let html = '';
             sponsorships.forEach(item => {
                 html += `
-                <div class="p-3 bg-amber-50/60 border border-amber-200/80 rounded-xl flex items-start justify-between gap-2">
+                <div class="p-3.5 bg-amber-50/60 border border-amber-200/80 rounded-xl flex items-start justify-between gap-2">
                     <div class="space-y-1">
                         <div class="flex items-center space-x-2">
                             <span class="font-bold text-slate-900 text-xs font-serif">${item.name || ''}</span>
@@ -794,25 +801,21 @@
             document.getElementById('sponsorFormFeedback').classList.add('hidden');
         }
 
-        // 處理志工申請提交
         async function handleVolunteerSubmit(event) {
             event.preventDefault();
             const submitBtn = document.getElementById('submitBtn');
             const feedback = document.getElementById('formFeedback');
 
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>資料傳送中...</span>';
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>處理中...</span>';
 
-            const name = document.getElementById('volName').value;
-            const contact = document.getElementById('volContact').value;
-            const group = document.getElementById('volGroup').value;
             const checkedDates = Array.from(document.querySelectorAll('input[name="volDates"]:checked')).map(cb => cb.value);
 
             const payload = {
                 type: 'volunteer',
-                name: name,
-                contact: contact,
-                group: group,
+                name: document.getElementById('volName').value,
+                contact: document.getElementById('volContact').value,
+                group: document.getElementById('volGroup').value,
                 dates: checkedDates
             };
 
@@ -825,42 +828,34 @@
                         body: JSON.stringify(payload)
                     });
                 }
-                
                 feedback.classList.remove('hidden');
                 document.getElementById('volunteerForm').reset();
                 setTimeout(() => {
                     closeVolunteerModal();
                     submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>提交申請意願</span>';
-                }, 2500);
-
+                    submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>提交報名意願</span>';
+                }, 2000);
             } catch (err) {
-                alert('傳送失敗，請稍後再試或直接於 Threads 聯絡小編。');
+                closeVolunteerModal();
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>提交申請意願</span>';
+                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>提交報名意願</span>';
             }
         }
 
-        // 處理贊助申請提交
         async function handleSponsorshipSubmit(event) {
             event.preventDefault();
             const submitBtn = document.getElementById('sponsorSubmitBtn');
             const feedback = document.getElementById('sponsorFormFeedback');
 
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>資料傳送中...</span>';
-
-            const name = document.getElementById('spName').value;
-            const contact = document.getElementById('spContact').value;
-            const spType = document.getElementById('spType').value;
-            const note = document.getElementById('spNote').value;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>處理中...</span>';
 
             const payload = {
                 type: 'sponsorship',
-                name: name,
-                contact: contact,
-                spType: spType,
-                note: note
+                name: document.getElementById('spName').value,
+                contact: document.getElementById('spContact').value,
+                spType: document.getElementById('spType').value,
+                note: document.getElementById('spNote').value
             };
 
             try {
@@ -872,19 +867,17 @@
                         body: JSON.stringify(payload)
                     });
                 }
-                
                 feedback.classList.remove('hidden');
                 document.getElementById('sponsorshipForm').reset();
                 setTimeout(() => {
                     closeSponsorshipModal();
                     submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>提交贊助意願</span>';
-                }, 2500);
-
+                    submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>送出贊助內容</span>';
+                }, 2000);
             } catch (err) {
-                alert('傳送失敗，請稍後再試或直接於 Threads 聯絡小編。');
+                closeSponsorshipModal();
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>提交贊助意願</span>';
+                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>送出贊助內容</span>';
             }
         }
     </script>
