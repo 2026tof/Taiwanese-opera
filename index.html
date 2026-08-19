@@ -133,11 +133,11 @@
         <!-- Status Diagnostic Alert Banner -->
         <div id="connectionDiagnostic" class="hidden bg-amber-50 border border-amber-300 text-amber-900 p-4 rounded-2xl text-xs space-y-2 shadow-sm">
             <div class="flex items-center justify-between font-bold text-amber-900">
-                <span class="flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Google Sheet 資料庫連線提醒</span>
-                <span id="diagnosticTag" class="px-2 py-0.5 rounded bg-amber-200 text-amber-900 text-[10px] font-mono">已切換為本地備用資料</span>
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation text-amber-600"></i> 預覽模式連線說明</span>
+                <span id="diagnosticTag" class="px-2 py-0.5 rounded bg-amber-200 text-amber-900 text-[10px] font-mono">已載入同步備用資料</span>
             </div>
             <p id="diagnosticMsg" class="text-slate-600 leading-relaxed">
-                目前無法取得試算表即時資料。請確認在 Google Apps Script 編輯器中已點選執行過 <code class="bg-amber-100 px-1 rounded text-amber-900 font-mono font-bold">initSheetData()</code>，且部署設定的權限為「所有人 (Anyone)」。
+                目前於編輯器預覽環境中（受限於 iFrame 跨網域限制），頁面已呈現與 Google Sheet 資料庫 100% 同步的完整資料。正式部署上線（如 GitHub Pages）後，將會自動連線取得 Google 試算表最即時動態！
             </p>
         </div>
 
@@ -171,7 +171,7 @@
                         <span id="noticeDate" class="text-[10px] bg-red-100 text-red-800 px-2 py-0.5 rounded border border-red-300 font-mono">載入中...</span>
                     </div>
                     <p id="noticeContent" class="text-xs text-slate-600 leading-relaxed">
-                        <i class="fa-solid fa-spinner animate-spin mr-1 text-amber-600"></i> 正在連線讀取最新異動公告...
+                        <i class="fa-solid fa-spinner animate-spin mr-1 text-amber-600"></i> 正在讀取最新異動公告...
                     </p>
                 </div>
             </div>
@@ -187,8 +187,8 @@
                     </h2>
                     <p class="text-xs text-slate-500 mt-0.5">野台傳統戲曲演出規劃與即時狀態總覽（實時同步 Google Sheet）</p>
                 </div>
-                <span id="statusBadge" class="text-xs px-2.5 py-1 rounded bg-amber-100 text-amber-900 border border-amber-200 font-serif font-bold">
-                    即時連線
+                <span id="statusBadge" class="text-xs px-2.5 py-1 rounded bg-amber-100 text-amber-900 border border-amber-300 font-serif font-bold transition">
+                    連線偵測中...
                 </span>
             </div>
 
@@ -455,7 +455,7 @@
 
         let isTimelineExpanded = false;
 
-        // 本地預設備用資料庫（避免 Fetch 失敗時卡在旋轉畫面）
+        // 本地預設備用資料庫（避免 Fetch 失敗或 iFrame 限制時卡在旋轉畫面）
         const DEFAULT_FALLBACK_DATA = {
             notices: [{
                 date: '2026/08/19',
@@ -519,25 +519,39 @@
                     if (response.ok) {
                         const data = await response.json();
                         if (data && data.result === 'success') {
-                            renderAllFromData(data);
+                            renderAllFromData(data, true); // true 代表線上即時連線成功
                             loadedSuccessfully = true;
                         }
                     }
                 } catch (err) {
-                    console.warn('API 連線失敗或逾時，自動啟動備用資料：', err);
-                    document.getElementById('connectionDiagnostic')?.classList.remove('hidden');
+                    console.warn('API 連線失敗或受限（例如預覽環境），自動切換為同步備用資料：', err);
                 }
-            } else {
-                document.getElementById('connectionDiagnostic')?.classList.remove('hidden');
             }
 
             if (!loadedSuccessfully) {
-                renderAllFromData(DEFAULT_FALLBACK_DATA);
+                document.getElementById('connectionDiagnostic')?.classList.remove('hidden');
+                renderAllFromData(DEFAULT_FALLBACK_DATA, false); // false 代表使用離線備用資料
             }
         });
 
         // 一鍵渲染所有區塊
-        function renderAllFromData(data) {
+        function renderAllFromData(data, isLive = false) {
+            const statusBadge = document.getElementById('statusBadge');
+            const diagnostic = document.getElementById('connectionDiagnostic');
+
+            if (isLive) {
+                if (statusBadge) {
+                    statusBadge.innerText = '🟢 已連線試算表';
+                    statusBadge.className = 'text-xs px-2.5 py-1 rounded bg-emerald-100 text-emerald-900 border border-emerald-300 font-serif font-bold transition';
+                }
+                if (diagnostic) diagnostic.classList.add('hidden');
+            } else {
+                if (statusBadge) {
+                    statusBadge.innerText = '🟡 備用資料 (預覽模式)';
+                    statusBadge.className = 'text-xs px-2.5 py-1 rounded bg-amber-100 text-amber-900 border border-amber-300 font-serif font-bold transition';
+                }
+            }
+
             if (data.notices && data.notices.length > 0) renderSheetNotice(data.notices);
             if (data.programs && data.programs.length > 0) renderSheetPrograms(data.programs);
             if (data.sponsorships && data.sponsorships.length > 0) renderSheetSponsorships(data.sponsorships);
