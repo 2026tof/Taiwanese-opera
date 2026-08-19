@@ -183,9 +183,9 @@
                 <div>
                     <h2 class="text-base sm:text-lg font-bold font-serif text-slate-900 flex items-center space-x-2">
                         <i class="fa-solid fa-calendar-days text-amber-600"></i>
-                        <span>戲曲演出規劃（每日晚間 19:00 - 21:30）</span>
+                        <span>戲曲演出規劃｜每日晚間 19:00 - 21:30</span>
                     </h2>
-                    <p class="text-xs text-slate-500 mt-0.5">野台傳統戲曲演出規劃與即時狀態總覽（實時同步 Google Sheet）</p>
+                    <p class="text-xs text-slate-500 mt-0.5">野台傳統戲曲演出規劃與即時狀態總覽</p>
                 </div>
                 <span id="statusBadge" class="text-xs px-2.5 py-1 rounded bg-amber-100 text-amber-900 border border-amber-200 font-serif font-bold">
                     即時連線
@@ -455,38 +455,6 @@
 
         let isTimelineExpanded = false;
 
-        // 本地預設備用資料庫（避免 Fetch 失敗時卡在旋轉畫面）
-        const DEFAULT_FALLBACK_DATA = {
-            notices: [{
-                date: '2026/08/19',
-                title: '節目異動公告',
-                content: '@huei.kai.tech 最新公告：9/18 古都木偶劇團演出正常舉行！9/19 演出因故取消，9/20 至 9/22 公演與 9/21 辦桌活動按原定計畫如期舉行（每日開演時間 19:00 - 21:30）。'
-            }],
-            programs: [
-                { dayTag: 'Day 1', date: '2026/09/18', troupe: '古都木偶劇團', play: '戲目：《包公斬駙馬》', status: '已定案', updateTime: '2026/08/19', showTime: '19:00 - 21:30' },
-                { dayTag: 'Day 2', date: '2026/09/19', troupe: '本日休演 / 取消', play: '9/19 因行程調整取消演出，全天休演進行現場維護。', status: '已取消', updateTime: '2026/08/19', showTime: '-' },
-                { dayTag: 'Day 3', date: '2026/09/20', troupe: '春美歌劇團', play: '戲目：《陳世美反奸》', status: '已定案', updateTime: '2026/08/18', showTime: '19:00 - 21:30' },
-                { dayTag: 'Day 4', date: '2026/09/21', troupe: '壓軸大戲 & 辦桌日', play: '節目總籌說明壓軸演出與辦桌活動按原定計畫如期舉行，替補劇團協調中。', status: '劇目洽談中', updateTime: '2026/08/18', showTime: '19:00 - 21:30' },
-                { dayTag: 'Day 5', date: '2026/09/22', troupe: '劇團洽談中', play: '配合演出行程調整，最新演出劇團與戲目將由主辦單位發布。', status: '待主辦公布', updateTime: '2026/08/19', showTime: '19:00 - 21:30' }
-            ],
-            sponsorships: [
-                { time: '2026/08/18', name: '烤雞特攻隊 (@hsien9969)', spType: '現烤烤雞 100 隻', note: '熱情應援贊助 100 隻現烤烤雞，供 9/21 辦桌與市集活動', status: '已確認' }
-            ],
-            announcements: [
-                { time: '2026/08/19', tag: '節目異動', title: '9/18 正常公演、9/19 演出取消，9/20-9/22 持續按計畫進行', content: '主辦團隊發布最新行程說明，9/18 古都木偶劇團正常演出，9/19 演出因故取消。9/20 至 9/22 公演與 9/21 壓軸辦桌活動持續照常籌備舉辦。' },
-                { time: '2026/08/18', tag: '總籌回應', title: '9/21 壓軸演出與辦桌如期舉辦', content: '針對劇團名單調整，9/21 壓軸當天的野台戲曲演出與辦桌饗宴將「按原定計畫如期舉行」，目前已積極與幾家優質戲曲劇團接洽替補檔期。' },
-                { time: '2026/08/18', tag: '劇團聲明', title: '明華園總團澄清未獲邀參演', content: '明華園戲劇總團於臉書專頁發布聲明澄清，表示「未獲邀參與鍘美藝術節演出活動」，釐清網路傳聞。' },
-                { time: '2026/08/18', tag: '辦桌進度', title: '9/21 辦桌方案與菜單籌備中', content: '辦桌負責人 @yisatsai 表示正在與總鋪師協調菜單細節，預計提供整桌預訂與個人散客湊桌模式，線上報名表單將於確定後公布。' },
-                { time: '2026/08/18', tag: '贊助宣布', title: '烤雞特攻隊宣布大力贊助 100 隻烤雞', content: '贊助夥伴 @hsien9969（烤雞特攻隊）公開應援，承諾贊助 100 隻現烤烤雞，支援 9/21 現場辦桌與周邊市集活動。' }
-            ],
-            sources: [
-                { account: '@huei.kai.tech', url: 'https://www.threads.net/@huei.kai.tech', desc: '節目與總籌發起人，即時發布節目調度與行政動態。', theme: 'amber' },
-                { account: '@yisatsai', url: 'https://www.threads.net/@yisatsai', desc: '辦桌與餐飲負責人，統籌 9/21 辦桌菜單與桌次預約。', theme: 'red' },
-                { account: '@h.akito_1996', url: 'https://www.threads.net/@h.akito_1996', desc: '現場物資應援與民間即時熱情響應窗口。', theme: 'amber' },
-                { account: '@socialmedia.academia.taiwanica', url: 'https://www.threads.net/@socialmedia.academia.taiwanica', desc: '社群文化觀察與民俗藝術活動側記整理。', theme: 'sky' }
-            ]
-        };
-
         // 僅顯示日期 (YYYY/MM/DD)
         function formatTimeToDate(timeStr) {
             if (!timeStr) return '';
@@ -524,20 +492,96 @@
                         }
                     }
                 } catch (err) {
-                    console.warn('API 連線失敗或逾時，自動啟動備用資料：', err);
-                    document.getElementById('connectionDiagnostic')?.classList.remove('hidden');
+                    console.warn('API 連線失敗：', err);
                 }
-            } else {
-                document.getElementById('connectionDiagnostic')?.classList.remove('hidden');
             }
 
+            // 連線失敗時直接顯示失敗狀態，不帶入任何備用資料
             if (!loadedSuccessfully) {
-                renderAllFromData(DEFAULT_FALLBACK_DATA);
+                renderConnectionError();
             }
         });
 
+        // 處理連線失敗提示畫面（不載入任何備用假資料）
+        function renderConnectionError() {
+            const statusBadge = document.getElementById('statusBadge');
+            const diagnostic = document.getElementById('connectionDiagnostic');
+
+            if (statusBadge) {
+                statusBadge.innerText = '🔴 連線失敗';
+                statusBadge.className = 'text-xs px-2.5 py-1 rounded bg-red-100 text-red-900 border border-red-300 font-serif font-bold transition';
+            }
+            if (diagnostic) {
+                diagnostic.classList.remove('hidden');
+            }
+
+            const noticeContent = document.getElementById('noticeContent');
+            if (noticeContent) {
+                noticeContent.innerHTML = '<span class="text-red-700 font-medium"><i class="fa-solid fa-circle-exclamation mr-1"></i>無法讀取異動公告，請檢查 Google Sheet 資料庫連線狀態。</span>';
+            }
+
+            const noticeDate = document.getElementById('noticeDate');
+            if (noticeDate) {
+                noticeDate.innerText = '未連線';
+                noticeDate.className = 'text-[10px] bg-red-200 text-red-900 px-2 py-0.5 rounded border border-red-300 font-mono';
+            }
+
+            const programContainer = document.getElementById('programContainer');
+            if (programContainer) {
+                programContainer.innerHTML = `
+                    <div class="md:col-span-2 opera-card border-red-200 bg-red-50/20 rounded-2xl p-8 text-center text-red-700 text-xs">
+                        <i class="fa-solid fa-plug-circle-xmark text-2xl text-red-500 mb-2 block"></i>
+                        <span class="font-bold text-sm block mb-1">無法讀取演出節目資料庫</span>
+                        <span class="text-slate-500">請確認在 Google Apps Script 中已執行 initSheetData() 且權限設定為「所有人 (Anyone)」。</span>
+                    </div>
+                `;
+            }
+
+            const sponsorshipContainer = document.getElementById('sponsorshipListContainer');
+            if (sponsorshipContainer) {
+                sponsorshipContainer.innerHTML = `
+                    <div class="sm:col-span-2 p-6 text-center text-red-700 text-xs bg-red-50/30 rounded-xl border border-red-200">
+                        <i class="fa-solid fa-circle-exclamation text-red-500 mr-1"></i> 無法載入贊助應援榜（資料庫未連線）
+                    </div>
+                `;
+            }
+
+            const timelineContainer = document.getElementById('timelineContainer');
+            if (timelineContainer) {
+                timelineContainer.innerHTML = `
+                    <div class="py-6 text-red-700 text-xs">
+                        <i class="fa-solid fa-circle-exclamation mr-1"></i> 無法載入公告時間軸資料
+                    </div>
+                `;
+            }
+
+            const fadeOverlay = document.getElementById('fadeOverlay');
+            if (fadeOverlay) fadeOverlay.classList.add('hidden');
+
+            const toggleContainer = document.getElementById('timelineToggleContainer');
+            if (toggleContainer) toggleContainer.classList.add('hidden');
+
+            const sourceContainer = document.getElementById('sourceScrollContainer');
+            if (sourceContainer) {
+                sourceContainer.innerHTML = `
+                    <div class="p-4 text-xs text-red-700">
+                        <i class="fa-solid fa-circle-exclamation mr-1"></i> 無法載入 Threads 動態來源
+                    </div>
+                `;
+            }
+        }
+
         // 一鍵渲染所有區塊
         function renderAllFromData(data) {
+            const statusBadge = document.getElementById('statusBadge');
+            const diagnostic = document.getElementById('connectionDiagnostic');
+
+            if (statusBadge) {
+                statusBadge.innerText = '🟢 已連線試算表';
+                statusBadge.className = 'text-xs px-2.5 py-1 rounded bg-emerald-100 text-emerald-900 border border-emerald-300 font-serif font-bold transition';
+            }
+            if (diagnostic) diagnostic.classList.add('hidden');
+
             if (data.notices && data.notices.length > 0) renderSheetNotice(data.notices);
             if (data.programs && data.programs.length > 0) renderSheetPrograms(data.programs);
             if (data.sponsorships && data.sponsorships.length > 0) renderSheetSponsorships(data.sponsorships);
