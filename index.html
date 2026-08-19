@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 台南文藝負心運動之鍘美藝術節 - 歌仔戲籌備進度看板</title>
+    <title>2026 台南文藝負心運動之鍘美藝術節 - 籌備進度</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -62,7 +62,6 @@
             border-color: rgba(217, 119, 6, 0.45);
             box-shadow: 0 10px 25px -3px rgba(153, 27, 27, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.03);
         }
-        /* Custom scrollbar styling for natural horizontal scrolling */
         .custom-horizontal-scrollbar::-webkit-scrollbar {
             height: 6px;
         }
@@ -150,20 +149,20 @@
                     開鑼起鼓・鍘美大戲登台
                 </h2>
                 <p class="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-xl mx-auto">
-                    由民間自發籌辦，集結傳統布袋與歌仔戲團體，規劃 4 天戲曲大戲，並結合 9/21 壓軸辦桌饗宴與贊助市集。
+                    由民間自發籌辦，集結傳統布袋與歌仔戲團體，規劃野台戲曲演出，並結合辦桌饗宴與贊助市集。
                 </p>
             </div>
 
-            <!-- Essential Notice Banner -->
-            <div class="mt-6 bg-red-50/90 border border-red-200 rounded-2xl p-4 text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
-                <div class="space-y-1">
+            <!-- Dynamic Notice Banner -->
+            <div id="noticeBannerContainer" class="mt-6 bg-red-50/90 border border-red-200 rounded-2xl p-4 text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
+                <div class="space-y-1 w-full">
                     <div class="inline-flex items-center space-x-2 text-red-800 text-xs font-bold">
                         <i class="fa-solid fa-bullhorn text-red-600 animate-pulse"></i>
-                        <span class="font-serif">最新異動公告</span>
-                        <span class="text-[10px] bg-red-100 text-red-800 px-2 py-0.5 rounded border border-red-300 font-mono">2026/08/19</span>
+                        <span id="noticeTag" class="font-serif">節目異動公告</span>
+                        <span id="noticeDate" class="text-[10px] bg-red-100 text-red-800 px-2 py-0.5 rounded border border-red-300 font-mono">2026/08/19</span>
                     </div>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        @huei.kai.tech 節目演出行程表調整為：9/18、9/20、9/21、9/22 登台演出。
+                    <p id="noticeContent" class="text-xs text-slate-600 leading-relaxed">
+                        @huei.kai.tech 最新公告：9/18 古都木偶劇團演出正常舉行！9/19 演出因故取消，9/20 至 9/22 公演與 9/21 辦桌活動如期舉辦。
                     </p>
                 </div>
             </div>
@@ -177,15 +176,15 @@
                         <i class="fa-solid fa-calendar-days text-amber-600"></i>
                         <span>戲曲演出規劃（2026/09/18 - 2026/09/22）</span>
                     </h2>
-                    <p class="text-xs text-slate-500 mt-0.5">野台傳統戲曲演出規劃與即時資料庫狀態</p>
+                    <p class="text-xs text-slate-500 mt-0.5">野台傳統戲曲演出規劃與即時狀態總覽</p>
                 </div>
-                <span class="text-xs px-2.5 py-1 rounded bg-red-100 text-red-800 border border-red-200 font-serif font-bold">
-                    演出 4 日
+                <span class="text-xs px-2.5 py-1 rounded bg-amber-100 text-amber-900 border border-amber-200 font-serif font-bold">
+                    即時進度
                 </span>
             </div>
 
             <div id="programContainer" class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <!-- Day 1 -->
+                <!-- Day 1 (Normal) -->
                 <div class="opera-card rounded-2xl p-4 flex flex-col justify-between space-y-2">
                     <div class="flex items-center justify-between">
                         <span class="text-xs font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300">2026/09/18</span>
@@ -200,7 +199,21 @@
                     </div>
                 </div>
 
-                <!-- Day 2 -->
+                <!-- Day 2 (Cancelled) -->
+                <div class="opera-card border-rose-300 bg-rose-50/30 rounded-2xl p-4 flex flex-col justify-between space-y-2 opacity-80">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-mono font-bold text-rose-900 bg-rose-100 px-2 py-0.5 rounded border border-rose-300">2026/09/19</span>
+                        <span class="text-[10px] bg-rose-200 text-rose-900 border border-rose-300 px-2 py-0.5 rounded font-bold">已取消</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-sm font-serif line-through decoration-rose-500">本日休演 / 取消</h3>
+                        <p class="text-xs text-rose-800 mt-1 leading-relaxed">
+                            9/19 因行程調整取消演出，全天休演進行現場維護。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Day 3 -->
                 <div class="opera-card rounded-2xl p-4 flex flex-col justify-between space-y-2">
                     <div class="flex items-center justify-between">
                         <span class="text-xs font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300">2026/09/20</span>
@@ -215,7 +228,7 @@
                     </div>
                 </div>
 
-                <!-- Day 3 -->
+                <!-- Day 4 -->
                 <div class="opera-card border-amber-400 bg-amber-50/40 rounded-2xl p-4 flex flex-col justify-between space-y-2">
                     <div class="flex items-center justify-between">
                         <span class="text-xs font-mono font-bold text-red-900 bg-red-100 px-2 py-0.5 rounded border border-red-300">2026/09/21</span>
@@ -224,13 +237,13 @@
                     <div>
                         <h3 class="font-bold text-slate-900 text-sm font-serif">壓軸大戲 & 辦桌日</h3>
                         <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-                            節目總籌說明壓軸演出與辦桌活動按原定計畫如期舉行，替補劇團協調中。
+                            壓軸演出與辦桌活動按原定計畫如期舉行，替補劇團積極協調中。
                         </p>
                     </div>
                 </div>
 
-                <!-- Day 4 -->
-                <div class="opera-card border-amber-300 bg-amber-50/30 rounded-2xl p-4 flex flex-col justify-between space-y-2">
+                <!-- Day 5 -->
+                <div class="opera-card border-amber-300 bg-amber-50/30 rounded-2xl p-4 flex flex-col justify-between space-y-2 md:col-span-2">
                     <div class="flex items-center justify-between">
                         <span class="text-xs font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300">2026/09/22</span>
                         <span class="text-[10px] bg-amber-200 text-amber-900 border border-amber-300 px-2 py-0.5 rounded font-medium">待主辦公布</span>
@@ -238,7 +251,7 @@
                     <div>
                         <h3 class="font-bold text-slate-900 text-sm font-serif">劇團洽談中</h3>
                         <p class="text-xs text-amber-900 mt-1 leading-relaxed">
-                            配合演出行程調整，最新演出劇團與戲目將由主辦單位發布。
+                            最新演出劇團與戲目將由主辦單位後續發布。
                         </p>
                     </div>
                 </div>
@@ -262,7 +275,6 @@
             </div>
 
             <div id="sponsorshipListContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <!-- Initial Confirmed Real Item -->
                 <div class="p-3.5 bg-amber-50/60 border border-amber-200/80 rounded-xl flex items-start justify-between gap-2">
                     <div class="space-y-1">
                         <div class="flex items-center space-x-2">
@@ -327,7 +339,7 @@
                         <i class="fa-solid fa-clock-rotate-left text-amber-600"></i>
                         <span>籌備進度與民間公告時間軸</span>
                     </h2>
-                    <p class="text-xs text-slate-500 mt-0.5">即時同步最新動態（預設前 5 則，日期精確度至日）</p>
+                    <p class="text-xs text-slate-500 mt-0.5">即時同步最新動態（預設顯示前 5 則）</p>
                 </div>
             </div>
 
@@ -339,10 +351,10 @@
                         <div class="absolute -left-[27px] top-0 w-3.5 h-3.5 rounded-full bg-rose-500 border-2 border-white shadow-sm"></div>
                         <div class="flex flex-wrap items-center gap-2">
                             <span class="font-mono font-bold text-rose-900 bg-rose-100 px-2 py-0.5 rounded border border-rose-300">2026/08/19</span>
-                            <span class="font-bold text-slate-900 font-serif">[節目異動] 9/19 繡花園戲劇團取消演出，行程調整為 9/18、9/20、9/21、9/22</span>
+                            <span class="font-bold text-slate-900 font-serif">[節目異動] 9/18 正常公演、9/19 取消演出</span>
                         </div>
                         <p class="text-slate-600 mt-1.5 leading-relaxed">
-                            因劇團檔期異動，9/19 繡花園戲劇團取消演出。節目行程調整為 9/18、9/20、9/21、9/22，主辦團隊正積極協調接洽替補劇團中，最新異動將第一時間公布。
+                            主辦團隊發布最新行程說明，9/18 古都木偶劇團正常演出，9/19 演出因故取消。9/20 至 9/22 公演與 9/21 壓軸辦桌活動持續照常籌備舉辦。
                         </p>
                     </div>
 
@@ -393,18 +405,6 @@
                             贊助夥伴 <span class="text-amber-800 font-medium">@hsien9969</span>（烤雞特攻隊）公開應援，承諾贊助 100 隻現烤烤雞支援辦桌與市集。
                         </p>
                     </div>
-
-                    <!-- Entry 6 (Hidden when collapsed) -->
-                    <div class="relative timeline-extra-item hidden">
-                        <div class="absolute -left-[27px] top-0 w-3.5 h-3.5 rounded-full bg-sky-500 border-2 border-white shadow-sm"></div>
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="font-mono font-bold text-sky-900 bg-sky-100 px-2 py-0.5 rounded border border-sky-300">2026/08/17</span>
-                            <span class="font-bold text-slate-900 font-serif">[行政進度] 場地評估與路權申請送件</span>
-                        </div>
-                        <p class="text-slate-600 mt-1.5 leading-relaxed">
-                            籌備小組進行台南市區野台演出場地會勘，並向相關單位提報路權使用申請。
-                        </p>
-                    </div>
                 </div>
 
                 <div id="fadeOverlay" class="fade-overlay"></div>
@@ -419,15 +419,15 @@
             </div>
         </section>
 
-        <!-- SECTION 4: OFFICIAL THREADS LINKS (Native Horizontal Scrolling Container) -->
+        <!-- SECTION 4: OFFICIAL THREADS LINKS -->
         <section class="opera-card rounded-2xl p-5 space-y-3">
             <div class="flex items-center justify-between border-b border-amber-100 pb-3">
                 <div>
                     <h3 class="text-sm sm:text-base font-bold font-serif text-slate-900 flex items-center space-x-2">
                         <i class="fa-brands fa-threads text-amber-600"></i>
-                        <span>即時動態來源（Threads 官方與民間合作頻道）</span>
+                        <span>即時動態來源</span>
                     </h3>
-                    <p class="text-xs text-slate-500 mt-0.5">直接橫向滾動或滑動卡片切換瀏覽</p>
+                    <p class="text-xs text-slate-500 mt-0.5">可直接橫向滾動或滑動卡片切換瀏覽</p>
                 </div>
                 <span class="text-xs text-slate-400 flex items-center space-x-1">
                     <i class="fa-solid fa-arrows-left-right"></i>
@@ -435,7 +435,7 @@
                 </span>
             </div>
 
-            <!-- Native Horizontal Scroll Container -->
+            <!-- Dynamic Source Scroll Container -->
             <div id="sourceScrollContainer" class="flex gap-3 overflow-x-auto pb-3 pt-1 snap-x snap-mandatory custom-horizontal-scrollbar" style="-webkit-overflow-scrolling: touch;">
                 
                 <!-- Card 1: @huei.kai.tech -->
@@ -548,7 +548,7 @@
                     <label class="block text-slate-700 font-medium mb-1">可參與日期（可複選） *</label>
                     <div id="volDatesContainer" class="space-y-1.5 pt-1 text-slate-600">
                         <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" name="volDates" value="2026/09/18" class="rounded border-amber-300 text-emerald-600 focus:ring-0">
+                            <input type="checkbox" name="volDates" value="2026/09/18" checked class="rounded border-amber-300 text-emerald-600 focus:ring-0">
                             <span>2026/09/18</span>
                         </label>
                         <label class="flex items-center space-x-2 cursor-pointer">
@@ -632,20 +632,36 @@
 
         let isTimelineExpanded = false;
 
-        // 僅顯示日期 (YYYY/MM/DD)
+        // 僅顯示日期 (YYYY/MM/DD) - 修正時區扣一天問題
         function formatTimeToDate(timeStr) {
             if (!timeStr) return '';
-            const match = timeStr.match(/^(\d{4}[\/-]\d{1,2}[\/-]\d{1,2})/);
-            return match ? match[1].replace(/-/g, '/') : timeStr;
+            const str = String(timeStr);
+
+            // 若為含有 T 的 ISO 時區字串（例如 2026-09-17T16:00:00.000Z），轉換為本地時區（GMT+8）日期
+            if (str.includes('T')) {
+                const dateObj = new Date(str);
+                if (!isNaN(dateObj.getTime())) {
+                    const yyyy = dateObj.getFullYear();
+                    const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+                    const dd = String(dateObj.getDate()).padStart(2, '0');
+                    return `${yyyy}/${mm}/${dd}`;
+                }
+            }
+
+            const match = str.match(/^(\d{4}[\/-]\d{1,2}[\/-]\d{1,2})/);
+            return match ? match[1].replace(/-/g, '/') : str;
         }
 
-        // 載入後動態同步 Google Sheet 最新消息與節目資料
+        // 頁面載入後，動態向 Google Sheet 抓取全部資料並進行實時渲染
         document.addEventListener('DOMContentLoaded', async () => {
             if (!GOOGLE_SCRIPT_URL) return;
             try {
                 const response = await fetch(GOOGLE_SCRIPT_URL);
                 const data = await response.json();
                 if (data.result === 'success') {
+                    if (data.notices && data.notices.length > 0) {
+                        renderSheetNotice(data.notices);
+                    }
                     if (data.announcements && data.announcements.length > 0) {
                         renderSheetAnnouncements(data.announcements);
                     }
@@ -655,29 +671,96 @@
                     if (data.sponsorships && data.sponsorships.length > 0) {
                         renderSheetSponsorships(data.sponsorships);
                     }
+                    if (data.sources && data.sources.length > 0) {
+                        renderSheetSources(data.sources);
+                    }
                 }
             } catch (err) {
                 console.log('現正顯示預設備份資料');
             }
         });
 
-        // 渲染節目時程，嚴格按照資料庫記載內容
+        function renderSheetNotice(notices) {
+            const latestNotice = notices[notices.length - 1];
+            if (!latestNotice) return;
+
+            const dateEl = document.getElementById('noticeDate');
+            const tagEl = document.getElementById('noticeTag');
+            const contentEl = document.getElementById('noticeContent');
+
+            if (dateEl) dateEl.innerText = formatTimeToDate(latestNotice.date || '');
+            if (tagEl && latestNotice.title) tagEl.innerText = latestNotice.title;
+            if (contentEl) contentEl.innerText = latestNotice.content || '';
+        }
+
+        function renderSheetSources(sources) {
+            const container = document.getElementById('sourceScrollContainer');
+            if (!container) return;
+
+            let html = '';
+            sources.forEach(item => {
+                const theme = item.theme || 'amber';
+                let bgClass = 'bg-amber-50/60 hover:bg-amber-100/80 border-amber-200';
+                let textClass = 'text-amber-900 group-hover:text-amber-700';
+                let iconClass = 'text-amber-700';
+                let footerClass = 'border-amber-200/60 text-amber-800';
+
+                if (theme === 'red') {
+                    bgClass = 'bg-red-50/60 hover:bg-red-100/80 border-red-200';
+                    textClass = 'text-red-900 group-hover:text-red-700';
+                    iconClass = 'text-red-700';
+                    footerClass = 'border-red-200/60 text-red-800';
+                } else if (theme === 'sky') {
+                    bgClass = 'bg-sky-50/60 hover:bg-sky-100/80 border-sky-200';
+                    textClass = 'text-sky-900 group-hover:text-sky-700';
+                    iconClass = 'text-sky-700';
+                    footerClass = 'border-sky-200/60 text-sky-800';
+                }
+
+                let displayAccount = item.account || '';
+                if (displayAccount.length > 18) {
+                    displayAccount = displayAccount.substring(0, 15) + '...';
+                }
+
+                html += `
+                <a href="${item.url || '#'}" target="_blank" rel="noopener noreferrer" class="snap-start shrink-0 w-64 p-3.5 rounded-xl ${bgClass} border transition flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="font-bold text-sm ${textClass}">${displayAccount}</span>
+                            <i class="fa-brands fa-threads ${iconClass}"></i>
+                        </div>
+                        <p class="text-xs text-slate-600">${item.desc || ''}</p>
+                    </div>
+                    <div class="mt-3 pt-2 border-t ${footerClass} flex items-center justify-between text-[11px] font-bold">
+                        <span>開啟 Threads 主頁</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </div>
+                </a>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
         function renderSheetPrograms(programs) {
             const container = document.getElementById('programContainer');
             if (!container) return;
 
             let html = '';
             programs.forEach((item) => {
-                const isCancelled = item.troupe && item.troupe.includes('取消');
+                const isCancelled = (item.status && item.status.includes('取消')) || (item.troupe && item.troupe.includes('取消'));
+                const isNoPerf = (item.status && (item.status.includes('休演') || item.status.includes('無演出'))) || (item.troupe && item.troupe.includes('無演出'));
                 const isNegotiating = item.status && item.status.includes('洽談');
                 
                 let cardClass = 'opera-card rounded-2xl p-4 flex flex-col justify-between space-y-2';
                 let dateBadgeClass = 'text-xs font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300';
                 let statusBadgeClass = 'text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded font-medium';
+                let titleStyle = 'font-bold text-slate-900 text-sm font-serif';
 
-                if (isCancelled) {
-                    cardClass = 'opera-card border-amber-300 bg-amber-50/30 rounded-2xl p-4 flex flex-col justify-between space-y-2';
-                    statusBadgeClass = 'text-[10px] bg-amber-200 text-amber-900 border border-amber-300 px-2 py-0.5 rounded font-medium';
+                if (isCancelled || isNoPerf) {
+                    cardClass = 'opera-card border-rose-300 bg-rose-50/30 rounded-2xl p-4 flex flex-col justify-between space-y-2 opacity-80';
+                    dateBadgeClass = 'text-xs font-mono font-bold text-rose-900 bg-rose-100 px-2 py-0.5 rounded border border-rose-300';
+                    statusBadgeClass = 'text-[10px] bg-rose-200 text-rose-900 border border-rose-300 px-2 py-0.5 rounded font-bold';
+                    titleStyle = 'font-bold text-slate-800 text-sm font-serif line-through decoration-rose-500';
                 } else if (isNegotiating) {
                     cardClass = 'opera-card border-amber-400 bg-amber-50/40 rounded-2xl p-4 flex flex-col justify-between space-y-2';
                     dateBadgeClass = 'text-xs font-mono font-bold text-red-900 bg-red-100 px-2 py-0.5 rounded border border-red-300';
@@ -693,8 +776,8 @@
                         <span class="${statusBadgeClass}">${item.status || '洽談中'}</span>
                     </div>
                     <div>
-                        <h3 class="font-bold text-slate-900 text-sm font-serif">${item.troupe || ''}</h3>
-                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                        <h3 class="${titleStyle}">${item.troupe || ''}</h3>
+                        <p class="text-xs ${isCancelled ? 'text-rose-800' : 'text-slate-600'} mt-1 leading-relaxed">
                             ${item.play || ''}
                         </p>
                     </div>
@@ -704,7 +787,6 @@
             container.innerHTML = html;
         }
 
-        // 渲染公告時間軸
         function renderSheetAnnouncements(announcements) {
             const container = document.getElementById('timelineContainer');
             if (!container) return;
@@ -720,11 +802,16 @@
                 const isExtra = index >= 5;
                 const hiddenClass = (isExtra && !isTimelineExpanded) ? 'hidden' : '';
                 const displayTime = formatTimeToDate(item.time || '');
+                const isNoticeRed = item.tag && (item.tag.includes('異動') || item.tag.includes('取消'));
+
+                const dotBg = isNoticeRed ? 'bg-rose-500' : 'bg-amber-500';
+                const tagBg = isNoticeRed ? 'text-rose-900 bg-rose-100 border-rose-300' : 'text-amber-900 bg-amber-100 border-amber-300';
+
                 html += `
                 <div class="relative timeline-extra-item ${isExtra ? 'is-extra-entry' : ''} ${hiddenClass}">
-                    <div class="absolute -left-[27px] top-0 w-3.5 h-3.5 rounded-full bg-amber-500 border-2 border-white shadow-sm"></div>
+                    <div class="absolute -left-[27px] top-0 w-3.5 h-3.5 rounded-full ${dotBg} border-2 border-white shadow-sm"></div>
                     <div class="flex flex-wrap items-center gap-2">
-                        <span class="font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300">${displayTime}</span>
+                        <span class="font-mono font-bold text-xs px-2 py-0.5 rounded border ${tagBg}">${displayTime}</span>
                         <span class="font-bold text-slate-900 font-serif">[${item.tag || '動態'}] ${item.title || ''}</span>
                     </div>
                     <p class="text-slate-600 mt-1.5 leading-relaxed">${item.content || ''}</p>
@@ -734,7 +821,6 @@
             container.innerHTML = html;
         }
 
-        // 切換時間軸展開/折疊
         function toggleTimelineExpand() {
             isTimelineExpanded = !isTimelineExpanded;
             const mask = document.getElementById('timelineMask');
