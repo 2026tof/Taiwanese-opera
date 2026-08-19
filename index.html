@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 台南文藝負心運動之鍘美藝術節 - 籌備進度</title>
+    <title>2026 台南文藝負心運動之鍘美藝術節 - 籌備進度看板</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -98,7 +98,6 @@
 </head>
 <body class="min-h-full flex flex-col font-sans bg-[#FAF7F2] text-slate-800 antialiased selection:bg-amber-200 selection:text-amber-950">
 
-    <!-- Opera Stage Header -->
     <header class="border-b border-amber-200/80 bg-white/90 backdrop-blur sticky top-0 z-30 shadow-sm">
         <div class="h-1 bg-gradient-to-r from-red-700 via-amber-500 to-red-700"></div>
         <div class="max-w-4xl mx-auto px-4 py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -131,7 +130,6 @@
 
     <main class="flex-1 max-w-4xl w-full mx-auto p-4 sm:p-6 space-y-8">
 
-        <!-- Stage Hero Banner -->
         <section class="stage-banner-bg border border-amber-300/60 rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden shadow-sm">
             <div class="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-red-700 via-amber-500 to-red-700"></div>
             <div class="absolute top-3 inset-x-0 flex justify-between px-6 opacity-60 text-amber-800 text-xs pointer-events-none font-serif">
@@ -153,7 +151,7 @@
                 </p>
             </div>
 
-            <!-- Dynamic Notice Banner -->
+            <!-- Dynamic Notice Banner directly matched to Sheet -->
             <div id="noticeBannerContainer" class="mt-6 bg-red-50/90 border border-red-200 rounded-2xl p-4 text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
                 <div class="space-y-1 w-full">
                     <div class="inline-flex items-center space-x-2 text-red-800 text-xs font-bold">
@@ -162,13 +160,12 @@
                         <span id="noticeDate" class="text-[10px] bg-red-100 text-red-800 px-2 py-0.5 rounded border border-red-300 font-mono">2026/08/19</span>
                     </div>
                     <p id="noticeContent" class="text-xs text-slate-600 leading-relaxed">
-                        @huei.kai.tech 最新公告：9/18 古都木偶劇團演出正常舉行！9/19 演出因故取消，9/20 至 9/22 公演與 9/21 辦桌活動如期舉辦。
+                        @huei.kai.tech 最新公告：9/18 古都木偶劇團演出正常舉行！9/19 因行程調整休演進行現場維護，9/20 至 9/22 公演與 9/21 辦桌活動如期舉辦。
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 1: PROGRAM TIMELINE -->
         <section class="space-y-4">
             <div class="border-b border-amber-200 pb-3 flex items-center justify-between">
                 <div>
@@ -199,16 +196,16 @@
                     </div>
                 </div>
 
-                <!-- Day 2 (Cancelled) -->
+                <!-- Day 2 (Day Off / Maintenance) -->
                 <div class="opera-card border-rose-300 bg-rose-50/30 rounded-2xl p-4 flex flex-col justify-between space-y-2 opacity-80">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-mono font-bold text-rose-900 bg-rose-100 px-2 py-0.5 rounded border border-rose-300">2026/09/19</span>
-                        <span class="text-[10px] bg-rose-200 text-rose-900 border border-rose-300 px-2 py-0.5 rounded font-bold">已取消</span>
+                        <span class="text-xs font-mono font-bold text-rose-900 bg-rose-100 px-2 py-0.5 rounded border border-rose-300"></span>
+                        <span class="text-[10px] bg-rose-200 text-rose-900 border border-rose-300 px-2 py-0.5 rounded font-bold"></span>
                     </div>
                     <div>
-                        <h3 class="font-bold text-slate-800 text-sm font-serif line-through decoration-rose-500">本日休演 / 取消</h3>
+                        <h3 class="font-bold text-slate-800 text-sm font-serif line-through decoration-rose-500"></h3>
                         <p class="text-xs text-rose-800 mt-1 leading-relaxed">
-                            9/19 因行程調整取消演出，全天休演進行現場維護。
+                        
                         </p>
                     </div>
                 </div>
@@ -216,14 +213,14 @@
                 <!-- Day 3 -->
                 <div class="opera-card rounded-2xl p-4 flex flex-col justify-between space-y-2">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300">2026/09/20</span>
-                        <span class="text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded font-medium">已定案</span>
+                        <span class="text-xs font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300"></span>
+                        <span class="text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded font-medium"></span>
                     </div>
                     <div>
-                        <h3 class="font-bold text-slate-900 text-sm font-serif">春美歌劇團</h3>
+                        <h3 class="font-bold text-slate-900 text-sm font-serif"></h3>
                         <p class="text-xs text-slate-600 mt-1 flex items-center space-x-1">
                             <i class="fa-solid fa-scroll text-[10px] text-amber-600"></i>
-                            <span>戲目：《陳世美反奸》</span>
+                            <span></span>
                         </p>
                     </div>
                 </div>
@@ -235,9 +232,9 @@
                         <span class="text-[10px] bg-amber-200 text-amber-900 border border-amber-300 px-2 py-0.5 rounded font-medium">劇目洽談中</span>
                     </div>
                     <div>
-                        <h3 class="font-bold text-slate-900 text-sm font-serif">壓軸大戲 & 辦桌日</h3>
+                        <h3 class="font-bold text-slate-900 text-sm font-serif"></h3>
                         <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-                            壓軸演出與辦桌活動按原定計畫如期舉行，替補劇團積極協調中。
+                            
                         </p>
                     </div>
                 </div>
@@ -249,16 +246,15 @@
                         <span class="text-[10px] bg-amber-200 text-amber-900 border border-amber-300 px-2 py-0.5 rounded font-medium">待主辦公布</span>
                     </div>
                     <div>
-                        <h3 class="font-bold text-slate-900 text-sm font-serif">劇團洽談中</h3>
+                        <h3 class="font-bold text-slate-900 text-sm font-serif"></h3>
                         <p class="text-xs text-amber-900 mt-1 leading-relaxed">
-                            最新演出劇團與戲目將由主辦單位後續發布。
+                            
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 2: SPONSORSHIP BOARD -->
         <section class="opera-card rounded-2xl p-5 space-y-4">
             <div class="flex items-center justify-between flex-wrap gap-2 border-b border-amber-200 pb-3">
                 <div>
@@ -266,7 +262,7 @@
                         <i class="fa-solid fa-hand-holding-dollar text-amber-600"></i>
                         <span>贊助進度與公開應援榜</span>
                     </h2>
-                    <p class="text-xs text-slate-500 mt-0.5">經專人確認後的贊助合作將公開顯示於此榜單</p>
+                    <p class="text-xs text-slate-500 mt-0.5">經專人確認後的贊助合作將公開顯示於此</p>
                 </div>
                 <button onclick="openSponsorshipModal()" class="text-xs px-4 py-2 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white font-bold rounded-xl transition shadow flex items-center space-x-1.5 cursor-pointer">
                     <i class="fa-solid fa-gift"></i>
@@ -288,7 +284,6 @@
             </div>
         </section>
 
-        <!-- SECTION 3: VOLUNTEER RECRUITMENT -->
         <section class="space-y-4">
             <div class="border-b border-amber-200 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
@@ -331,7 +326,6 @@
             </div>
         </section>
 
-        <!-- SECTION: REAL-TIME ANNOUNCEMENT TIMELINE -->
         <section class="opera-card rounded-2xl p-5 space-y-4">
             <div class="border-b border-amber-200 pb-3 flex items-center justify-between flex-wrap gap-2">
                 <div>
@@ -351,7 +345,7 @@
                         <div class="absolute -left-[27px] top-0 w-3.5 h-3.5 rounded-full bg-rose-500 border-2 border-white shadow-sm"></div>
                         <div class="flex flex-wrap items-center gap-2">
                             <span class="font-mono font-bold text-rose-900 bg-rose-100 px-2 py-0.5 rounded border border-rose-300">2026/08/19</span>
-                            <span class="font-bold text-slate-900 font-serif">[節目異動] 9/18 正常公演、9/19 取消演出</span>
+                            <span class="font-bold text-slate-900 font-serif">[節目異動] 9/18 正常公演、9/19 取消休演維護</span>
                         </div>
                         <p class="text-slate-600 mt-1.5 leading-relaxed">
                             主辦團隊發布最新行程說明，9/18 古都木偶劇團正常演出，9/19 演出因故取消。9/20 至 9/22 公演與 9/21 壓軸辦桌活動持續照常籌備舉辦。
@@ -419,7 +413,6 @@
             </div>
         </section>
 
-        <!-- SECTION 4: OFFICIAL THREADS LINKS -->
         <section class="opera-card rounded-2xl p-5 space-y-3">
             <div class="flex items-center justify-between border-b border-amber-100 pb-3">
                 <div>
@@ -509,7 +502,6 @@
         <p>傳統歌仔戲曲與辦桌活動 ｜ 籌備資訊同步追蹤看板</p>
     </footer>
 
-    <!-- Volunteer Application Modal -->
     <div id="volunteerModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white border border-amber-300 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <button onclick="closeVolunteerModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition">
@@ -578,7 +570,6 @@
         </div>
     </div>
 
-    <!-- Event Sponsorship Application Modal -->
     <div id="sponsorshipModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white border border-amber-300 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <button onclick="closeSponsorshipModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition">
@@ -637,7 +628,6 @@
             if (!timeStr) return '';
             const str = String(timeStr);
 
-            // 若為含有 T 的 ISO 時區字串（例如 2026-09-17T16:00:00.000Z），轉換為本地時區（GMT+8）日期
             if (str.includes('T')) {
                 const dateObj = new Date(str);
                 if (!isNaN(dateObj.getTime())) {
@@ -743,48 +733,74 @@
 
         function renderSheetPrograms(programs) {
             const container = document.getElementById('programContainer');
-            if (!container) return;
+            const volDatesContainer = document.getElementById('volDatesContainer');
 
-            let html = '';
-            programs.forEach((item) => {
-                const isCancelled = (item.status && item.status.includes('取消')) || (item.troupe && item.troupe.includes('取消'));
-                const isNoPerf = (item.status && (item.status.includes('休演') || item.status.includes('無演出'))) || (item.troupe && item.troupe.includes('無演出'));
-                const isNegotiating = item.status && item.status.includes('洽談');
-                
-                let cardClass = 'opera-card rounded-2xl p-4 flex flex-col justify-between space-y-2';
-                let dateBadgeClass = 'text-xs font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300';
-                let statusBadgeClass = 'text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded font-medium';
-                let titleStyle = 'font-bold text-slate-900 text-sm font-serif';
+            if (container && programs && programs.length > 0) {
+                let html = '';
+                programs.forEach((item, index) => {
+                    const isCancelled = (item.status && item.status.includes('取消')) || (item.troupe && item.troupe.includes('取消'));
+                    const isNoPerf = (item.status && (item.status.includes('休演') || item.status.includes('無演出'))) || (item.troupe && item.troupe.includes('無演出'));
+                    const isNegotiating = item.status && item.status.includes('洽談');
+                    
+                    let cardClass = 'opera-card rounded-2xl p-4 flex flex-col justify-between space-y-2';
+                    if (index === 4) cardClass += ' md:col-span-2';
 
-                if (isCancelled || isNoPerf) {
-                    cardClass = 'opera-card border-rose-300 bg-rose-50/30 rounded-2xl p-4 flex flex-col justify-between space-y-2 opacity-80';
-                    dateBadgeClass = 'text-xs font-mono font-bold text-rose-900 bg-rose-100 px-2 py-0.5 rounded border border-rose-300';
-                    statusBadgeClass = 'text-[10px] bg-rose-200 text-rose-900 border border-rose-300 px-2 py-0.5 rounded font-bold';
-                    titleStyle = 'font-bold text-slate-800 text-sm font-serif line-through decoration-rose-500';
-                } else if (isNegotiating) {
-                    cardClass = 'opera-card border-amber-400 bg-amber-50/40 rounded-2xl p-4 flex flex-col justify-between space-y-2';
-                    dateBadgeClass = 'text-xs font-mono font-bold text-red-900 bg-red-100 px-2 py-0.5 rounded border border-red-300';
-                    statusBadgeClass = 'text-[10px] bg-amber-200 text-amber-900 border border-amber-300 px-2 py-0.5 rounded font-medium';
-                }
+                    let dateBadgeClass = 'text-xs font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300';
+                    let statusBadgeClass = 'text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded font-medium';
+                    let titleStyle = 'font-bold text-slate-900 text-sm font-serif';
 
-                const displayDate = formatTimeToDate(item.date || '');
+                    if (isCancelled || isNoPerf) {
+                        cardClass = 'opera-card border-rose-300 bg-rose-50/30 rounded-2xl p-4 flex flex-col justify-between space-y-2 opacity-80';
+                        if (index === 4) cardClass += ' md:col-span-2';
+                        dateBadgeClass = 'text-xs font-mono font-bold text-rose-900 bg-rose-100 px-2 py-0.5 rounded border border-rose-300';
+                        statusBadgeClass = 'text-[10px] bg-rose-200 text-rose-900 border border-rose-300 px-2 py-0.5 rounded font-bold';
+                        titleStyle = 'font-bold text-slate-800 text-sm font-serif line-through decoration-rose-500';
+                    } else if (isNegotiating) {
+                        cardClass = 'opera-card border-amber-400 bg-amber-50/40 rounded-2xl p-4 flex flex-col justify-between space-y-2';
+                        if (index === 4) cardClass += ' md:col-span-2';
+                        dateBadgeClass = 'text-xs font-mono font-bold text-red-900 bg-red-100 px-2 py-0.5 rounded border border-red-300';
+                        statusBadgeClass = 'text-[10px] bg-amber-200 text-amber-900 border border-amber-300 px-2 py-0.5 rounded font-medium';
+                    }
 
-                html += `
-                <div class="${cardClass}">
-                    <div class="flex items-center justify-between">
-                        <span class="${dateBadgeClass}">${displayDate}</span>
-                        <span class="${statusBadgeClass}">${item.status || '洽談中'}</span>
+                    const displayDate = formatTimeToDate(item.date || '');
+
+                    html += `
+                    <div class="${cardClass}">
+                        <div class="flex items-center justify-between">
+                            <span class="${dateBadgeClass}">${displayDate}</span>
+                            <span class="${statusBadgeClass}">${item.status || '洽談中'}</span>
+                        </div>
+                        <div>
+                            <h3 class="${titleStyle}">${item.troupe || ''}</h3>
+                            <p class="text-xs ${isCancelled ? 'text-rose-800' : 'text-slate-600'} mt-1 leading-relaxed">
+                                ${item.play || ''}
+                            </p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="${titleStyle}">${item.troupe || ''}</h3>
-                        <p class="text-xs ${isCancelled ? 'text-rose-800' : 'text-slate-600'} mt-1 leading-relaxed">
-                            ${item.play || ''}
-                        </p>
-                    </div>
-                </div>
-                `;
-            });
-            container.innerHTML = html;
+                    `;
+                });
+                container.innerHTML = html;
+            }
+
+            // Dynamically update volunteer checkboxes from active program dates
+            if (volDatesContainer && programs && programs.length > 0) {
+                let vHtml = '';
+                programs.forEach(item => {
+                    const dateVal = formatTimeToDate(item.date || '');
+                    if (!dateVal) return;
+                    const isCancelled = item.status && (item.status.includes('取消') || item.status.includes('休演'));
+                    if (isCancelled) return; // Skip cancelled dates for volunteer selection
+
+                    const isChecked = dateVal.includes('09/18') || dateVal.includes('09/21') ? 'checked' : '';
+                    vHtml += `
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" name="volDates" value="${dateVal}" ${isChecked} class="rounded border-amber-300 text-emerald-600 focus:ring-0">
+                        <span>${dateVal}</span>
+                    </label>
+                    `;
+                });
+                if (vHtml) volDatesContainer.innerHTML = vHtml;
+            }
         }
 
         function renderSheetAnnouncements(announcements) {
