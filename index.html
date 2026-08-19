@@ -501,7 +501,17 @@
                 renderConnectionError();
             }
         });
+function getCachedData() {
+  const cache = localStorage.getItem("sheet_data");
+  const cacheTime = localStorage.getItem("sheet_data_time");
+  const NOW = new Date().getTime();
 
+  // 若快取存在且未超過 5 分鐘 (300,000 ms)
+  if (cache && cacheTime && (NOW - cacheTime < 300000)) {
+    return JSON.parse(cache);
+  }
+  return null;
+}
         // 處理連線失敗提示畫面（不載入任何備用假資料）
         function renderConnectionError() {
             const statusBadge = document.getElementById('statusBadge');
