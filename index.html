@@ -74,7 +74,7 @@
             border-radius: 9999px;
         }
         .timeline-mask {
-            max-height: 480px;
+            max-height: 380px;
             overflow: hidden;
             position: relative;
             transition: max-height 0.4s ease-in-out;
@@ -133,11 +133,11 @@
         <!-- Status Diagnostic Alert Banner -->
         <div id="connectionDiagnostic" class="hidden bg-amber-50 border border-amber-300 text-amber-900 p-4 rounded-2xl text-xs space-y-2 shadow-sm">
             <div class="flex items-center justify-between font-bold text-amber-900">
-                <span class="flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation text-amber-600"></i> 預覽模式連線說明</span>
-                <span id="diagnosticTag" class="px-2 py-0.5 rounded bg-amber-200 text-amber-900 text-[10px] font-mono">已載入同步備用資料</span>
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Google Sheet 資料庫連線提醒</span>
+                <span id="diagnosticTag" class="px-2 py-0.5 rounded bg-amber-200 text-amber-900 text-[10px] font-mono">已切換為本地備用資料</span>
             </div>
             <p id="diagnosticMsg" class="text-slate-600 leading-relaxed">
-                目前於編輯器預覽環境中（受限於 iFrame 跨網域限制），頁面已呈現與 Google Sheet 資料庫 100% 同步的完整資料。正式部署上線（如 GitHub Pages）後，將會自動連線取得 Google 試算表最即時動態！
+                目前無法取得試算表即時資料。請確認在 Google Apps Script 編輯器中已點選執行過 <code class="bg-amber-100 px-1 rounded text-amber-900 font-mono font-bold">initSheetData()</code>，且部署設定的權限為「所有人 (Anyone)」。
             </p>
         </div>
 
@@ -152,7 +152,7 @@
             <div class="max-w-2xl mx-auto space-y-3 pt-2 relative z-10">
                 <span class="inline-flex items-center space-x-2 text-xs font-bold text-amber-900 bg-amber-100/80 border border-amber-300 px-3.5 py-1 rounded-full shadow-sm">
                     <i class="fa-solid fa-scroll text-amber-700"></i>
-                    <span>辦理時間：2026/09/18 - 2026/09/22（每日晚間 19:00 - 21:30）</span>
+                    <span>2026/09/18 - 2026/09/22（每日晚間 19:00 - 21:30）</span>
                 </span>
                 <h2 class="text-2xl sm:text-3xl font-black font-serif opera-red-text tracking-wide">
                     開鑼起鼓・鍘美大戲登台
@@ -171,7 +171,7 @@
                         <span id="noticeDate" class="text-[10px] bg-red-100 text-red-800 px-2 py-0.5 rounded border border-red-300 font-mono">載入中...</span>
                     </div>
                     <p id="noticeContent" class="text-xs text-slate-600 leading-relaxed">
-                        <i class="fa-solid fa-spinner animate-spin mr-1 text-amber-600"></i> 正在讀取最新異動公告...
+                        <i class="fa-solid fa-spinner animate-spin mr-1 text-amber-600"></i> 正在連線讀取最新異動公告...
                     </p>
                 </div>
             </div>
@@ -183,12 +183,12 @@
                 <div>
                     <h2 class="text-base sm:text-lg font-bold font-serif text-slate-900 flex items-center space-x-2">
                         <i class="fa-solid fa-calendar-days text-amber-600"></i>
-                        <span>戲曲演出規劃（2026/09/18 - 2026/09/22 ｜ 每晚 19:00 - 21:30）</span>
+                        <span>戲曲演出規劃（每日晚間 19:00 - 21:30）</span>
                     </h2>
                     <p class="text-xs text-slate-500 mt-0.5">野台傳統戲曲演出規劃與即時狀態總覽（實時同步 Google Sheet）</p>
                 </div>
-                <span id="statusBadge" class="text-xs px-2.5 py-1 rounded bg-amber-100 text-amber-900 border border-amber-300 font-serif font-bold transition">
-                    連線偵測中...
+                <span id="statusBadge" class="text-xs px-2.5 py-1 rounded bg-amber-100 text-amber-900 border border-amber-200 font-serif font-bold">
+                    即時連線
                 </span>
             </div>
 
@@ -276,7 +276,7 @@
                         <i class="fa-solid fa-clock-rotate-left text-amber-600"></i>
                         <span>籌備進度與民間公告時間軸</span>
                     </h2>
-                    <p class="text-xs text-slate-500 mt-0.5">即時同步 Google Sheet 最新動態（預設顯示前 5 則）</p>
+                    <p class="text-xs text-slate-500 mt-0.5">即時同步 Google Sheet 最新動態（預設顯示前 3 則）</p>
                 </div>
             </div>
 
@@ -455,12 +455,12 @@
 
         let isTimelineExpanded = false;
 
-        // 本地預設備用資料庫（避免 Fetch 失敗或 iFrame 限制時卡在旋轉畫面）
+        // 本地預設備用資料庫（避免 Fetch 失敗時卡在旋轉畫面）
         const DEFAULT_FALLBACK_DATA = {
             notices: [{
                 date: '2026/08/19',
                 title: '節目異動公告',
-                content: '@huei.kai.tech 最新公告：9/18 古都木偶劇團演出正常舉行！9/19 演出因故取消，9/20 至 9/22 公演與 9/21 辦桌活動按原定計畫如期舉行（開演時間每晚 19:00 - 21:30）。'
+                content: '@huei.kai.tech 最新公告：9/18 古都木偶劇團演出正常舉行！9/19 演出因故取消，9/20 至 9/22 公演與 9/21 辦桌活動按原定計畫如期舉行（每日開演時間 19:00 - 21:30）。'
             }],
             programs: [
                 { dayTag: 'Day 1', date: '2026/09/18', troupe: '古都木偶劇團', play: '戲目：《包公斬駙馬》', status: '已定案', updateTime: '2026/08/19', showTime: '19:00 - 21:30' },
@@ -519,39 +519,25 @@
                     if (response.ok) {
                         const data = await response.json();
                         if (data && data.result === 'success') {
-                            renderAllFromData(data, true); // true 代表線上即時連線成功
+                            renderAllFromData(data);
                             loadedSuccessfully = true;
                         }
                     }
                 } catch (err) {
-                    console.warn('API 連線失敗或受限（例如預覽環境），自動切換為同步備用資料：', err);
+                    console.warn('API 連線失敗或逾時，自動啟動備用資料：', err);
+                    document.getElementById('connectionDiagnostic')?.classList.remove('hidden');
                 }
+            } else {
+                document.getElementById('connectionDiagnostic')?.classList.remove('hidden');
             }
 
             if (!loadedSuccessfully) {
-                document.getElementById('connectionDiagnostic')?.classList.remove('hidden');
-                renderAllFromData(DEFAULT_FALLBACK_DATA, false); // false 代表使用離線備用資料
+                renderAllFromData(DEFAULT_FALLBACK_DATA);
             }
         });
 
         // 一鍵渲染所有區塊
-        function renderAllFromData(data, isLive = false) {
-            const statusBadge = document.getElementById('statusBadge');
-            const diagnostic = document.getElementById('connectionDiagnostic');
-
-            if (isLive) {
-                if (statusBadge) {
-                    statusBadge.innerText = '🟢 已連線試算表';
-                    statusBadge.className = 'text-xs px-2.5 py-1 rounded bg-emerald-100 text-emerald-900 border border-emerald-300 font-serif font-bold transition';
-                }
-                if (diagnostic) diagnostic.classList.add('hidden');
-            } else {
-                if (statusBadge) {
-                    statusBadge.innerText = '🟡 備用資料 (預覽模式)';
-                    statusBadge.className = 'text-xs px-2.5 py-1 rounded bg-amber-100 text-amber-900 border border-amber-300 font-serif font-bold transition';
-                }
-            }
-
+        function renderAllFromData(data) {
             if (data.notices && data.notices.length > 0) renderSheetNotice(data.notices);
             if (data.programs && data.programs.length > 0) renderSheetPrograms(data.programs);
             if (data.sponsorships && data.sponsorships.length > 0) renderSheetSponsorships(data.sponsorships);
@@ -583,19 +569,27 @@
             let html = '';
             programs.forEach((item) => {
                 const isCancelled = item.status === '已取消' || (item.troupe && item.troupe.includes('取消'));
+                const isPending = item.status && (item.status.includes('洽談') || item.status.includes('公布') || item.status.includes('待'));
                 const isDay4 = item.dayTag === 'Day 4';
 
                 let cardStyle = 'opera-card rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3';
                 let badgeStyle = 'px-3.5 py-2 bg-gradient-to-b from-amber-100 to-amber-50 border border-amber-300 text-amber-900 font-bold text-xs rounded-xl text-center min-w-[80px] shadow-sm';
-                let statusTag = `<span class="text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded font-medium">${item.status || '已定案'}</span>`;
+                
+                // 狀態標籤顏色統一判定
+                let statusTagClass = 'bg-emerald-100 text-emerald-800 border-emerald-300';
+                if (isCancelled) {
+                    statusTagClass = 'bg-red-100 text-red-800 border-red-300';
+                } else if (isPending) {
+                    statusTagClass = 'bg-amber-100 text-amber-900 border-amber-300';
+                }
+                
+                let statusTag = `<span class="text-[10px] ${statusTagClass} border px-2 py-0.5 rounded font-medium">${item.status || '已定案'}</span>`;
 
                 if (isCancelled) {
                     cardStyle = 'opera-card border-red-300 bg-red-50/30 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3';
                     badgeStyle = 'px-3.5 py-2 bg-gradient-to-b from-red-100 to-red-50 border border-red-300 text-red-900 font-bold text-xs rounded-xl text-center min-w-[80px] shadow-sm';
-                    statusTag = `<span class="text-[10px] bg-red-100 text-red-800 border border-red-300 px-2 py-0.5 rounded font-medium">${item.status || '已取消'}</span>`;
                 } else if (isDay4) {
                     cardStyle = 'opera-card border-amber-400 bg-amber-50/40 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 relative overflow-hidden';
-                    statusTag = `<span class="text-[10px] bg-amber-200 text-amber-900 border border-amber-300 px-2 py-0.5 rounded font-medium">${item.status || '洽談中'}</span>`;
                 }
 
                 const timeBadge = !isCancelled ? `<span class="text-[10px] bg-amber-100 text-amber-900 border border-amber-300 px-2 py-0.5 rounded font-mono font-medium"><i class="fa-regular fa-clock mr-1"></i>${item.showTime || '19:00 - 21:30'}</span>` : '';
@@ -665,7 +659,7 @@
             container.innerHTML = html;
         }
 
-        // 4. 渲染時間軸公告
+        // 4. 渲染時間軸公告 (預設顯示前 3 則)
         function renderSheetAnnouncements(announcements) {
             const container = document.getElementById('timelineContainer');
             const fadeOverlay = document.getElementById('fadeOverlay');
@@ -674,7 +668,7 @@
 
             let html = '';
             announcements.forEach((item, index) => {
-                const isExtra = index >= 5;
+                const isExtra = index >= 3;
                 const hiddenClass = (isExtra && !isTimelineExpanded) ? 'hidden' : '';
                 const displayTime = formatTimeToDate(item.time || '');
 
@@ -691,7 +685,7 @@
             });
             container.innerHTML = html;
 
-            if (announcements.length > 5) {
+            if (announcements.length > 3) {
                 if (toggleContainer) toggleContainer.classList.remove('hidden');
                 if (fadeOverlay && !isTimelineExpanded) fadeOverlay.classList.remove('hidden');
             } else {
