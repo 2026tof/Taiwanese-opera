@@ -152,7 +152,7 @@
             <div class="max-w-2xl mx-auto space-y-3 pt-2 relative z-10">
                 <span class="inline-flex items-center space-x-2 text-xs font-bold text-amber-900 bg-amber-100/80 border border-amber-300 px-3.5 py-1 rounded-full shadow-sm">
                     <i class="fa-solid fa-scroll text-amber-700"></i>
-                    <span>辦理時間：2026/09/18 - 2026/09/22</span>
+                    <span>辦理時間：2026/09/18 - 2026/09/22（每日晚間 19:00 - 21:30）</span>
                 </span>
                 <h2 class="text-2xl sm:text-3xl font-black font-serif opera-red-text tracking-wide">
                     開鑼起鼓・鍘美大戲登台
@@ -183,7 +183,7 @@
                 <div>
                     <h2 class="text-base sm:text-lg font-bold font-serif text-slate-900 flex items-center space-x-2">
                         <i class="fa-solid fa-calendar-days text-amber-600"></i>
-                        <span>戲曲演出規劃（2026/09/18 - 2026/09/22）</span>
+                        <span>戲曲演出規劃（2026/09/18 - 2026/09/22 ｜ 每晚 19:00 - 21:30）</span>
                     </h2>
                     <p class="text-xs text-slate-500 mt-0.5">野台傳統戲曲演出規劃與即時狀態總覽（實時同步 Google Sheet）</p>
                 </div>
@@ -460,14 +460,14 @@
             notices: [{
                 date: '2026/08/19',
                 title: '節目異動公告',
-                content: '@huei.kai.tech 最新公告：9/18 古都木偶劇團演出正常舉行！9/19 演出因故取消，9/20 至 9/22 公演與 9/21 辦桌活動按原定計畫如期舉行。'
+                content: '@huei.kai.tech 最新公告：9/18 古都木偶劇團演出正常舉行！9/19 演出因故取消，9/20 至 9/22 公演與 9/21 辦桌活動按原定計畫如期舉行（開演時間每晚 19:00 - 21:30）。'
             }],
             programs: [
-                { dayTag: 'Day 1', date: '2026/09/18', troupe: '古都木偶劇團', play: '戲目：《包公斬駙馬》', status: '已定案', updateTime: '2026/08/19' },
-                { dayTag: 'Day 2', date: '2026/09/19', troupe: '本日休演 / 取消', play: '9/19 因行程調整取消演出，全天休演進行現場維護。', status: '已取消', updateTime: '2026/08/19' },
-                { dayTag: 'Day 3', date: '2026/09/20', troupe: '春美歌劇團', play: '戲目：《陳世美反奸》', status: '已定案', updateTime: '2026/08/18' },
-                { dayTag: 'Day 4', date: '2026/09/21', troupe: '壓軸大戲 & 辦桌日', play: '節目總籌說明壓軸演出與辦桌活動按原定計畫如期舉行，替補劇團協調中。', status: '劇目洽談中', updateTime: '2026/08/18' },
-                { dayTag: 'Day 5', date: '2026/09/22', troupe: '劇團洽談中', play: '配合演出行程調整，最新演出劇團與戲目將由主辦單位發布。', status: '待主辦公布', updateTime: '2026/08/19' }
+                { dayTag: 'Day 1', date: '2026/09/18', troupe: '古都木偶劇團', play: '戲目：《包公斬駙馬》', status: '已定案', updateTime: '2026/08/19', showTime: '19:00 - 21:30' },
+                { dayTag: 'Day 2', date: '2026/09/19', troupe: '本日休演 / 取消', play: '9/19 因行程調整取消演出，全天休演進行現場維護。', status: '已取消', updateTime: '2026/08/19', showTime: '-' },
+                { dayTag: 'Day 3', date: '2026/09/20', troupe: '春美歌劇團', play: '戲目：《陳世美反奸》', status: '已定案', updateTime: '2026/08/18', showTime: '19:00 - 21:30' },
+                { dayTag: 'Day 4', date: '2026/09/21', troupe: '壓軸大戲 & 辦桌日', play: '節目總籌說明壓軸演出與辦桌活動按原定計畫如期舉行，替補劇團協調中。', status: '劇目洽談中', updateTime: '2026/08/18', showTime: '19:00 - 21:30' },
+                { dayTag: 'Day 5', date: '2026/09/22', troupe: '劇團洽談中', play: '配合演出行程調整，最新演出劇團與戲目將由主辦單位發布。', status: '待主辦公布', updateTime: '2026/08/19', showTime: '19:00 - 21:30' }
             ],
             sponsorships: [
                 { time: '2026/08/18', name: '烤雞特攻隊 (@hsien9969)', spType: '現烤烤雞 100 隻', note: '熱情應援贊助 100 隻現烤烤雞，供 9/21 辦桌與市集活動', status: '已確認' }
@@ -598,25 +598,28 @@
                     statusTag = `<span class="text-[10px] bg-amber-200 text-amber-900 border border-amber-300 px-2 py-0.5 rounded font-medium">${item.status || '洽談中'}</span>`;
                 }
 
+                const timeBadge = !isCancelled ? `<span class="text-[10px] bg-amber-100 text-amber-900 border border-amber-300 px-2 py-0.5 rounded font-mono font-medium"><i class="fa-regular fa-clock mr-1"></i>${item.showTime || '19:00 - 21:30'}</span>` : '';
+
                 html += `
                 <div class="${cardStyle}">
-                    <div class="flex items-start space-x-3.5">
-                        <div class="${badgeStyle}">
+                    <div class="flex flex-1 min-w-0 items-start space-x-3.5">
+                        <div class="${badgeStyle} shrink-0">
                             <span class="text-[10px] block font-serif">${item.dayTag || ''}</span>
                             ${formatTimeToDate(item.date)}
                         </div>
-                        <div>
+                        <div class="flex-1 min-w-0">
                             <div class="flex items-center space-x-2 flex-wrap gap-1">
                                 <h3 class="font-bold text-slate-900 text-sm font-serif">${item.troupe || ''}</h3>
                                 ${statusTag}
+                                ${timeBadge}
                             </div>
-                            <p class="text-xs text-slate-600 mt-1 flex items-center space-x-1">
-                                <i class="fa-solid fa-scroll text-[10px] text-amber-600"></i>
-                                <span>${item.play || ''}</span>
+                            <p class="text-xs text-slate-600 mt-1.5 flex items-start space-x-1.5">
+                                <i class="fa-solid fa-scroll text-[10px] text-amber-600 mt-0.5 shrink-0"></i>
+                                <span class="break-words whitespace-normal leading-relaxed">${item.play || ''}</span>
                             </p>
                         </div>
                     </div>
-                    <div class="text-[10px] text-slate-400 font-mono sm:text-right shrink-0">更新：${formatTimeToDate(item.updateTime)}</div>
+                    <div class="text-[10px] text-slate-400 font-mono sm:text-right shrink-0 mt-2 sm:mt-0">更新：${formatTimeToDate(item.updateTime)}</div>
                 </div>
                 `;
             });
