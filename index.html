@@ -74,30 +74,24 @@
             border-radius: 9999px;
         }
         .timeline-mask {
-            max-height: 380px;
-            overflow: hidden;
+            max-height: none;
             position: relative;
             transition: max-height 0.4s ease-in-out;
-        }
-        .timeline-mask.expanded {
-            max-height: 3000px;
         }
         .fade-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 80px;
+            height: 60px;
             background: linear-gradient(to bottom, rgba(250, 247, 242, 0), rgba(250, 247, 242, 1));
             pointer-events: none;
-        }
-        .timeline-mask.expanded .fade-overlay {
-            display: none;
         }
     </style>
 </head>
 <body class="min-h-full flex flex-col font-sans bg-[#FAF7F2] text-slate-800 antialiased selection:bg-amber-200 selection:text-amber-950">
 
+    <!-- Header -->
     <header class="border-b border-amber-200/80 bg-white/90 backdrop-blur sticky top-0 z-30 shadow-sm">
         <div class="h-1 bg-gradient-to-r from-red-700 via-amber-500 to-red-700"></div>
         <div class="max-w-4xl mx-auto px-4 py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -134,13 +128,14 @@
         <div id="connectionDiagnostic" class="hidden bg-amber-50 border border-amber-300 text-amber-900 p-4 rounded-2xl text-xs space-y-2 shadow-sm">
             <div class="flex items-center justify-between font-bold text-amber-900">
                 <span class="flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Google Sheet 資料庫連線提醒</span>
-                <span id="diagnosticTag" class="px-2 py-0.5 rounded bg-amber-200 text-amber-900 text-[10px] font-mono">已切換為本地備用資料</span>
+                <span id="diagnosticTag" class="px-2 py-0.5 rounded bg-amber-200 text-amber-900 text-[10px] font-mono">連線確認中</span>
             </div>
             <p id="diagnosticMsg" class="text-slate-600 leading-relaxed">
-                目前無法取得試算表即時資料。請確認在 Google Apps Script 編輯器中已點選執行過 <code class="bg-amber-100 px-1 rounded text-amber-900 font-mono font-bold">initSheetData()</code>，且部署設定的權限為「所有人 (Anyone)」。
+                目前無法取得試算表即時資料。請確認在 Google Apps Script 編輯器中已點選執行過 <code class="bg-amber-100 px-1 rounded text-amber-900 font-mono font-bold">initSheetData()</code>，且部署設定權限為「所有人 (Anyone)」。
             </p>
         </div>
 
+        <!-- Stage Hero Banner -->
         <section class="stage-banner-bg border border-amber-300/60 rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden shadow-sm">
             <div class="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-red-700 via-amber-500 to-red-700"></div>
             <div class="absolute top-3 inset-x-0 flex justify-between px-6 opacity-60 text-amber-800 text-xs pointer-events-none font-serif">
@@ -162,7 +157,7 @@
                 </p>
             </div>
 
-            <!-- Dynamic Notice Banner (Read from Sheet) -->
+            <!-- Dynamic Notice Banner -->
             <div id="noticeBannerContainer" class="mt-6 bg-red-50/90 border border-red-200 rounded-2xl p-4 text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
                 <div class="space-y-1 w-full">
                     <div class="inline-flex items-center space-x-2 text-red-800 text-xs font-bold">
@@ -177,7 +172,7 @@
             </div>
         </section>
 
-        <!-- SECTION 1: PROGRAM SCHEDULE (Fully Dynamic from Sheet) -->
+        <!-- SECTION 1: PROGRAM SCHEDULE -->
         <section class="space-y-4">
             <div class="border-b border-amber-200 pb-3 flex items-center justify-between">
                 <div>
@@ -188,7 +183,7 @@
                     <p class="text-xs text-slate-500 mt-0.5">野台傳統戲曲演出規劃與即時狀態總覽</p>
                 </div>
                 <span id="statusBadge" class="text-xs px-2.5 py-1 rounded bg-amber-100 text-amber-900 border border-amber-200 font-serif font-bold">
-                    即時連線
+                    即時連線中...
                 </span>
             </div>
 
@@ -201,7 +196,7 @@
             </div>
         </section>
 
-        <!-- SECTION 2: SPONSORSHIP BOARD (Fully Dynamic from Sheet) -->
+        <!-- SECTION 2: SPONSORSHIP BOARD -->
         <section class="opera-card rounded-2xl p-5 space-y-4">
             <div class="flex items-center justify-between flex-wrap gap-2 border-b border-amber-200 pb-3">
                 <div>
@@ -217,7 +212,6 @@
                 </button>
             </div>
 
-            <!-- Dynamic Sponsorship Container -->
             <div id="sponsorshipListContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div class="sm:col-span-2 p-6 text-center text-slate-500 text-xs bg-amber-50/40 rounded-xl">
                     <i class="fa-solid fa-spinner animate-spin text-amber-600 mr-1"></i> 正在載入公開贊助應援榜...
@@ -268,7 +262,7 @@
             </div>
         </section>
 
-        <!-- SECTION 4: TIMELINE ANNOUNCEMENTS (Fully Dynamic from Sheet) -->
+        <!-- SECTION 4: TIMELINE ANNOUNCEMENTS -->
         <section class="opera-card rounded-2xl p-5 space-y-4">
             <div class="border-b border-amber-200 pb-3 flex items-center justify-between flex-wrap gap-2">
                 <div>
@@ -276,7 +270,7 @@
                         <i class="fa-solid fa-clock-rotate-left text-amber-600"></i>
                         <span>籌備進度與民間公告時間軸</span>
                     </h2>
-                    <p class="text-xs text-slate-500 mt-0.5">即時同步 Google Sheet 最新動態（預設顯示前 3 則）</p>
+                    <p class="text-xs text-slate-500 mt-0.5">預設呈現最新 3 則動態，可展開查看完整時間軸細項</p>
                 </div>
             </div>
 
@@ -288,19 +282,19 @@
                     </div>
                 </div>
 
-                <div id="fadeOverlay" class="fade-overlay"></div>
+                <div id="fadeOverlay" class="fade-overlay hidden"></div>
             </div>
 
             <!-- Timeline Toggle Button -->
-            <div id="timelineToggleContainer" class="pt-1 text-center relative z-20">
+            <div id="timelineToggleContainer" class="hidden pt-1 text-center relative z-20">
                 <button id="timelineToggleBtn" onclick="toggleTimelineExpand()" class="px-4 py-2 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300/80 rounded-xl font-bold text-xs transition shadow-sm inline-flex items-center space-x-2 cursor-pointer">
-                    <span id="timelineToggleText">展開更多動態</span>
+                    <span id="timelineToggleText">開啟全部時間軸</span>
                     <i id="timelineToggleIcon" class="fa-solid fa-chevron-down text-[10px]"></i>
                 </button>
             </div>
         </section>
 
-        <!-- SECTION 5: DYNAMIC SOURCES (Fully Dynamic from Sheet) -->
+        <!-- SECTION 5: DYNAMIC SOURCES -->
         <section class="opera-card rounded-2xl p-5 space-y-3">
             <div class="flex items-center justify-between border-b border-amber-100 pb-3">
                 <div>
@@ -316,7 +310,6 @@
                 </span>
             </div>
 
-            <!-- Dynamic Source Scroll Container -->
             <div id="sourceScrollContainer" class="flex gap-3 overflow-x-auto pb-3 pt-1 snap-x snap-mandatory custom-horizontal-scrollbar" style="-webkit-overflow-scrolling: touch;">
                 <div class="p-4 text-xs text-slate-500">
                     <i class="fa-solid fa-spinner animate-spin text-amber-600 mr-1"></i> 正在載入 Threads 頻道卡片...
@@ -449,11 +442,13 @@
         </div>
     </div>
 
+    <!-- JavaScript Logic -->
     <script>
         // 後台 Google Apps Script 網頁應用程式 URL
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOOO-hXcd4WiC5SGVjLExlxCOVNbQldEe7W-klyXsyJJVk5MfZgbq3hJC7ARwy7rLsnQ/exec';
 
         let isTimelineExpanded = false;
+        let totalAnnouncementsCount = 0;
 
         // 僅顯示日期 (YYYY/MM/DD)
         function formatTimeToDate(timeStr) {
@@ -478,8 +473,9 @@
 
             if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.includes('/exec')) {
                 try {
+                    // 放寬 Timeout 至 15 秒以相容 Apps Script 的冷啟動 (Cold start)
                     const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 8000);
+                    const timeoutId = setTimeout(() => controller.abort(), 15000);
 
                     const response = await fetch(GOOGLE_SCRIPT_URL, { signal: controller.signal });
                     clearTimeout(timeoutId);
@@ -492,27 +488,16 @@
                         }
                     }
                 } catch (err) {
-                    console.warn('API 連線失敗：', err);
+                    console.warn('API 連線失敗或逾時：', err);
                 }
             }
 
-            // 連線失敗時直接顯示失敗狀態，不帶入任何備用資料
             if (!loadedSuccessfully) {
                 renderConnectionError();
             }
         });
-function getCachedData() {
-  const cache = localStorage.getItem("sheet_data");
-  const cacheTime = localStorage.getItem("sheet_data_time");
-  const NOW = new Date().getTime();
 
-  // 若快取存在且未超過 5 分鐘 (300,000 ms)
-  if (cache && cacheTime && (NOW - cacheTime < 300000)) {
-    return JSON.parse(cache);
-  }
-  return null;
-}
-        // 處理連線失敗提示畫面（不載入任何備用假資料）
+        // 處理連線失敗提示畫面（嚴格不載入假資料）
         function renderConnectionError() {
             const statusBadge = document.getElementById('statusBadge');
             const diagnostic = document.getElementById('connectionDiagnostic');
@@ -629,7 +614,6 @@ function getCachedData() {
                 let cardStyle = 'opera-card rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3';
                 let badgeStyle = 'px-3.5 py-2 bg-gradient-to-b from-amber-100 to-amber-50 border border-amber-300 text-amber-900 font-bold text-xs rounded-xl text-center min-w-[80px] shadow-sm';
                 
-                // 狀態標籤顏色統一判定
                 let statusTagClass = 'bg-emerald-100 text-emerald-800 border-emerald-300';
                 if (isCancelled) {
                     statusTagClass = 'bg-red-100 text-red-800 border-red-300';
@@ -713,12 +697,15 @@ function getCachedData() {
             container.innerHTML = html;
         }
 
-        // 4. 渲染時間軸公告 (預設顯示前 3 則)
+        // 4. 渲染時間軸公告（一開始嚴格顯示前 3 則，可開啟全部時間軸）
         function renderSheetAnnouncements(announcements) {
             const container = document.getElementById('timelineContainer');
             const fadeOverlay = document.getElementById('fadeOverlay');
             const toggleContainer = document.getElementById('timelineToggleContainer');
+            const toggleText = document.getElementById('timelineToggleText');
             if (!container) return;
+
+            totalAnnouncementsCount = announcements.length;
 
             let html = '';
             announcements.forEach((item, index) => {
@@ -727,7 +714,7 @@ function getCachedData() {
                 const displayTime = formatTimeToDate(item.time || '');
 
                 html += `
-                <div class="relative timeline-extra-item ${isExtra ? 'is-extra-entry' : ''} ${hiddenClass}">
+                <div class="relative timeline-entry ${isExtra ? 'is-extra-entry' : ''} ${hiddenClass}">
                     <div class="absolute -left-[27px] top-0 w-3.5 h-3.5 rounded-full bg-amber-500 border-2 border-white shadow-sm"></div>
                     <div class="flex flex-wrap items-center gap-2">
                         <span class="font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300">${displayTime}</span>
@@ -739,9 +726,12 @@ function getCachedData() {
             });
             container.innerHTML = html;
 
-            if (announcements.length > 3) {
+            if (totalAnnouncementsCount > 3) {
                 if (toggleContainer) toggleContainer.classList.remove('hidden');
                 if (fadeOverlay && !isTimelineExpanded) fadeOverlay.classList.remove('hidden');
+                if (toggleText) {
+                    toggleText.innerText = isTimelineExpanded ? '收起動態' : `開啟全部時間軸 (共 ${totalAnnouncementsCount} 則)`;
+                }
             } else {
                 if (toggleContainer) toggleContainer.classList.add('hidden');
                 if (fadeOverlay) fadeOverlay.classList.add('hidden');
@@ -775,20 +765,30 @@ function getCachedData() {
             container.innerHTML = html;
         }
 
+        // 切換時間軸展開 (開啟全部時間軸 / 收起動態)
         function toggleTimelineExpand() {
             isTimelineExpanded = !isTimelineExpanded;
-            const mask = document.getElementById('timelineMask');
             const toggleText = document.getElementById('timelineToggleText');
             const toggleIcon = document.getElementById('timelineToggleIcon');
+            const fadeOverlay = document.getElementById('fadeOverlay');
+            const extraItems = document.querySelectorAll('.is-extra-entry');
+
+            extraItems.forEach(item => {
+                if (isTimelineExpanded) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
 
             if (isTimelineExpanded) {
-                mask.classList.add('expanded');
-                toggleText.innerText = '收起動態';
-                toggleIcon.className = 'fa-solid fa-chevron-up text-[10px]';
+                if (fadeOverlay) fadeOverlay.classList.add('hidden');
+                if (toggleText) toggleText.innerText = '收起動態';
+                if (toggleIcon) toggleIcon.className = 'fa-solid fa-chevron-up text-[10px]';
             } else {
-                mask.classList.remove('expanded');
-                toggleText.innerText = '展開更多動態';
-                toggleIcon.className = 'fa-solid fa-chevron-down text-[10px]';
+                if (fadeOverlay) fadeOverlay.classList.remove('hidden');
+                if (toggleText) toggleText.innerText = `開啟全部時間軸 (共 ${totalAnnouncementsCount} 則)`;
+                if (toggleIcon) toggleIcon.className = 'fa-solid fa-chevron-down text-[10px]';
             }
         }
 
